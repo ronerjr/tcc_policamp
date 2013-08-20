@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:p="http://primefaces.org/ui">
+<ui:component>
+<h:form>
+	<div id="header">
+		<div id="logotipo"></div>
+		<div id="of_logo"></div>
+		<div id="usuario_logado">
+			<p> Usuário: <h:outputText value="#{userView.userHelper.currentUser}"/></p>
+		</div>
+		<div id="topo"></div>
+		
+		<p:menubar id="menu_principal">  
+              <p:menuitem styleClass="menu_item" value="Caixa" url="/protected/user/index.jsf"/>
+              <p:menuitem styleClass="menu_item" value="Relatórios" url="/protected/manager/relatories.jsf"/>
+              <p:submenu styleClass="menu_item" label="Administração">
+              	<p:menuitem styleClass="menu_item" value="Complementos de Produtos" url="/protected/admin/adminProductComplement.jsf"/>
+              	<p:menuitem styleClass="menu_item" value="Financeiro" url="/protected/admin/adminFinance.jsf"/>
+              	<p:menuitem styleClass="menu_item" value="Mesas" url="/protected/admin/adminTables.jsf"/>
+              	<p:menuitem styleClass="menu_item" value="Produtos" url="/protected/admin/adminProduct.jsf"/>
+              	<p:menuitem styleClass="menu_item" value="Tipos de Produtos" url="/protected/admin/adminTypeProduct.jsf"/>
+              	<p:menuitem styleClass="menu_item" value="Unidades de Medida" url="/protected/admin/adminMeasurementUnit.jsf"/>
+              	<p:menuitem styleClass="menu_item" value="Usuários" url="/protected/admin/adminUser.jsf"/>              	
+              </p:submenu>
+              <p:menuitem styleClass="menu_item" value="Configurações" url="/protected/manager/config.jsf"/>
+              <p:menuitem styleClass="menu_item" value="Logout" icon="ui-icon-close" url="/j_spring_security_logout"/>
+        </p:menubar>
+	</div>
+</h:form>
+</ui:component>
+</html>
