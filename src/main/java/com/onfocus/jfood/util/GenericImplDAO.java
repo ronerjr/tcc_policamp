@@ -314,8 +314,8 @@ public class GenericImplDAO implements GenericDAO {
 
 	@Override
 	public UserType findUserTypeByType(String type) {
-		return (UserType) this.session.createCriteria(UserType.class).add(
-				Restrictions.eq("user_type", type));
+		return (UserType) this.session.createCriteria(UserType.class)
+				.add(Restrictions.eq("userType", type)).uniqueResult();
 	}
 
 	@Override

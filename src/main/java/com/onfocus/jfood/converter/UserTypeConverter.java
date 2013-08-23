@@ -3,6 +3,9 @@
  */
 package com.onfocus.jfood.converter;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -21,6 +24,7 @@ public class UserTypeConverter implements Converter {
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
+		Logger.getLogger("converter").log(Level.INFO, value);
 		return DAOFactory.getService().findUserTypeByType(value);
 	}
 

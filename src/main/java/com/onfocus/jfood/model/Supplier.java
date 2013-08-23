@@ -1,46 +1,49 @@
 package com.onfocus.jfood.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * The persistent class for the suppliers database table.
  * 
  */
 @Entity
-@Table(name = "suppliers")
+@Table(name="suppliers")
 public class Supplier implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	private Integer id;
 
-	@Column(name = "address")
+	@Column(nullable=false, length=250)
 	private String address;
 
-	@Column(name = "city_register")
+	@Column(name="city_register", length=12)
 	private String cityRegister;
 
-	@Column(name = "cnpj")
+	@Column(nullable=false, precision=131089)
 	private BigDecimal cnpj;
 
-	@Column(name = "company_name")
+	@Column(name="company_name", nullable=false, length=200)
 	private String companyName;
 
-	@Column(name = "state_register")
+	@Column(name="state_register", length=14)
 	private String stateRegister;
 
-	@Column(name = "trading_name")
+	@Column(name="trading_name", nullable=false, length=100)
 	private String tradingName;
 
-	public Supplier() {
-	}
+	//bi-directional many-to-one association to Invoice
+	@OneToMany(mappedBy="supplier")
+	private List<Invoice> invoices;
+
+    public Supplier() {
+    }
 
 	public Integer getId() {
 		return this.id;
@@ -98,109 +101,12 @@ public class Supplier implements Serializable {
 		this.tradingName = tradingName;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result
-				+ ((cityRegister == null) ? 0 : cityRegister.hashCode());
-		result = prime * result + ((cnpj == null) ? 0 : cnpj.hashCode());
-		result = prime * result
-				+ ((companyName == null) ? 0 : companyName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((stateRegister == null) ? 0 : stateRegister.hashCode());
-		result = prime * result
-				+ ((tradingName == null) ? 0 : tradingName.hashCode());
-		return result;
+	public List<Invoice> getInvoices() {
+		return this.invoices;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Supplier other = (Supplier) obj;
-		if (address == null) {
-			if (other.address != null) {
-				return false;
-			}
-		} else if (!address.equals(other.address)) {
-			return false;
-		}
-		if (cityRegister == null) {
-			if (other.cityRegister != null) {
-				return false;
-			}
-		} else if (!cityRegister.equals(other.cityRegister)) {
-			return false;
-		}
-		if (cnpj == null) {
-			if (other.cnpj != null) {
-				return false;
-			}
-		} else if (!cnpj.equals(other.cnpj)) {
-			return false;
-		}
-		if (companyName == null) {
-			if (other.companyName != null) {
-				return false;
-			}
-		} else if (!companyName.equals(other.companyName)) {
-			return false;
-		}
-		if (id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		} else if (!id.equals(other.id)) {
-			return false;
-		}
-		if (stateRegister == null) {
-			if (other.stateRegister != null) {
-				return false;
-			}
-		} else if (!stateRegister.equals(other.stateRegister)) {
-			return false;
-		}
-		if (tradingName == null) {
-			if (other.tradingName != null) {
-				return false;
-			}
-		} else if (!tradingName.equals(other.tradingName)) {
-			return false;
-		}
-		return true;
+	public void setInvoices(List<Invoice> invoices) {
+		this.invoices = invoices;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Supplier [id=" + id + ", address=" + address
-				+ ", cityRegister=" + cityRegister + ", cnpj=" + cnpj
-				+ ", companyName=" + companyName + ", stateRegister="
-				+ stateRegister + ", tradingName=" + tradingName + "]";
-	}
-
+	
 }
