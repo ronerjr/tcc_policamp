@@ -17,6 +17,10 @@ public class UserView implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private static final String PERSIST_USER = "/protected/admin/adminPersistUser.jsf";
+
+	private static final String CONSULT_USER = "/protected/admin/adminUser.jsf";
+
 	private User persistUser;
 
 	private User selectedUser;
@@ -29,15 +33,15 @@ public class UserView implements Serializable {
 
 	public String preparePersist() {
 		this.persistUser = new User();
-		return "/protected/admin/adminPersistUser.jsf";
+		return PERSIST_USER;
 	}
 
 	public String prepareUpdate() {
 		this.persistUser = this.selectedUser;
-		return "/protected/admin/adminPersistUser.jsf";
+		return PERSIST_USER;
 	}
 
-	public void update() {
+	public String update() {
 		if (this.userHelper.validateInsert(this.persistUser)) {
 			this.userHelper.setAuthorityByType(this.persistUser);
 			if (DAOFactory.getService().updateUser(this.persistUser) == this.persistUser) {
@@ -52,11 +56,13 @@ public class UserView implements Serializable {
 						new FacesMessage(FacesMessage.SEVERITY_ERROR,
 								"Erro ao alterar usuario", "ERROR"));
 			}
+			return CONSULT_USER;
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
 							"Erro ao alterar usuario", "ERROR"));
+			return PERSIST_USER;
 		}
 	}
 

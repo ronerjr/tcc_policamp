@@ -31,7 +31,7 @@ public class UserTypeConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component,
 			Object value) {
+		Logger.getLogger("converter").log(Level.INFO, value.toString());
 		return ((UserType) value).getUserType();
 	}
-
 }

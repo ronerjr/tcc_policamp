@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>jFood - Administração</title>
+</h:head>
+<h:body>
+	<ui:include src="/public/header.xhtml" />
+	<h:form>
+		<p:panel header="Tipos de Produtos">
+			<p:messages />
+			<h:commandButton styleClass="bt_padrao" icon="ui-icon-circle-plus"
+				id="insertProductType" value="Incluir"
+				action="#{productTypeView.prepareInsert}" />
+			<p:dataTable id="tabelaTipoProdutos"
+				value="#{productTypeView.typeHelper.listProductTypes}"
+				var="productType">
+				<p:column>
+					<f:facet name="header">Cód.</f:facet>
+					<h:outputText value="#{productType.NIdTipoProduto}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Tipo Produto</f:facet>
+					<h:outputText value="#{productType.STipo}" />
+				</p:column>
+				<p:column>
+					<h:commandButton id="prepareUpdate"
+						action="#{productTypeView.prepareUpdate}" styleClass="bt_padrao"
+						icon="ui-icon-pencil" value="Editar">
+						<f:setPropertyActionListener
+							target="#{productTypeView.persistProductType}"
+							value="#{productType}" />
+					</h:commandButton>
+					<p:commandButton id="prepareDelete" styleClass="bt_padrao"
+						value="Excluir" actionListener="#{productTypeView.prepareDelete}" oncomplete="confirmDelete.show();">
+						<f:setPropertyActionListener
+							target="#{productTypeView.selectedProductType}" value="#{productType}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:confirmDialog header="Excluir"
+				message="Deseja excluir este tipo de produto?" widgetVar="confirmDelete">
+				<p:commandButton id="confirmDeleteType" value="Sim"
+					action="#{productTypeView.delete}" oncomplete="confirmDelete.hide();"
+					ajax="false" />
+				<p:commandButton id="cancelDeleteType" value="Não"
+					onclick="confirmDelete.hide();" ajax="false" />
+			</p:confirmDialog>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

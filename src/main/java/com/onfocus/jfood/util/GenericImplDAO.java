@@ -58,20 +58,20 @@ public class GenericImplDAO implements GenericDAO {
 	@Override
 	public User findUserByUsername(String user) {
 		return (User) this.session.createCriteria(User.class).add(
-				Restrictions.eq("user_name", user));
+				Restrictions.eq("userName", user));
 	}
 
 	@Override
 	public User findUserByEmail(String email) {
 		return (User) this.session.createCriteria(User.class)
-				.add(Restrictions.eq("user_email", email)).uniqueResult();
+				.add(Restrictions.eq("userEmail", email)).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> listUserByType(UserType type) {
 		return this.session.createCriteria(User.class)
-				.add(Restrictions.eq("id_user_type", type.getId())).list();
+				.add(Restrictions.eq("userType", type.getId())).list();
 	}
 
 	@SuppressWarnings("unchecked")
