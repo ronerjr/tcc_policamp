@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.onfocus.jfood.model.Complement;
+import com.onfocus.jfood.model.Customer;
 import com.onfocus.jfood.model.MeasureUnity;
 import com.onfocus.jfood.model.Order;
 import com.onfocus.jfood.model.OrderStatus;
@@ -22,7 +23,7 @@ import com.onfocus.jfood.model.User;
 import com.onfocus.jfood.model.UserType;
 
 /**
- * @author Roner
+ * @author Nois
  * 
  */
 public class GenericImplDAO implements GenericDAO {
@@ -491,4 +492,31 @@ public class GenericImplDAO implements GenericDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	//Customers
+	
+	@Override
+	public Customer updateCustomer(Customer  customer) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public Customer findCustomerId(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Customer> listAllCustomers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Customer insertCustomers(Customer customer) {
+		this.session.flush();
+		this.session.save(customer);
+		return customer;
+	}
+	 
 }

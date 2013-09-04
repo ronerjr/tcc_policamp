@@ -1,8 +1,14 @@
 package com.onfocus.jfood.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 
 /**
@@ -18,30 +24,32 @@ public class Customer implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
 	private Integer id;
+	
+	private Boolean active;
 
-	@Column(length=250)
+	@Column(name="Endereco")
 	private String address;
 
-	@Column(name="cell_number", precision=11)
-	private BigDecimal cellNumber;
+	@Column(name="cell_number")
+	private String cellNumber;
 
-	@Column(nullable=false, precision=11)
-	private BigDecimal cpf;
+	@Column(name="cpf")
+	private String cpf;
 
-	@Column(name="customer_last_name", nullable=false, length=50)
+	@Column(name="customer_last_name")
 	private String customerLastName;
 
-	@Column(name="customer_name", nullable=false, length=20)
+	@Column(name="customer_name")
 	private String customerName;
 
-	@Column(length=50)
+	@Column(name="email")
 	private String email;
 
-	@Column(name="fone_number", nullable=false, precision=11)
-	private BigDecimal foneNumber;
+	@Column(name="fone_number")
+	private String foneNumber;
 
-	@Column(precision=10)
-	private BigDecimal rg;
+	@Column(name="rg")
+	private String rg;
 
     public Customer() {
     }
@@ -62,19 +70,19 @@ public class Customer implements Serializable {
 		this.address = address;
 	}
 
-	public BigDecimal getCellNumber() {
+	public String getCellNumber() {
 		return this.cellNumber;
 	}
 
-	public void setCellNumber(BigDecimal cellNumber) {
+	public void setCellNumber(String cellNumber) {
 		this.cellNumber = cellNumber;
 	}
 
-	public BigDecimal getCpf() {
+	public String getCpf() {
 		return this.cpf;
 	}
 
-	public void setCpf(BigDecimal cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
@@ -102,20 +110,29 @@ public class Customer implements Serializable {
 		this.email = email;
 	}
 
-	public BigDecimal getFoneNumber() {
+	public String getFoneNumber() {
 		return this.foneNumber;
 	}
 
-	public void setFoneNumber(BigDecimal foneNumber) {
+	public void setFoneNumber(String foneNumber) {
 		this.foneNumber = foneNumber;
 	}
 
-	public BigDecimal getRg() {
+	public String getRg() {
 		return this.rg;
 	}
 
-	public void setRg(BigDecimal rg) {
+	public void setRg(String rg) {
 		this.rg = rg;
+	}
+
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 }
