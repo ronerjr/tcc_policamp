@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>JanelaTeste</title>
+</h:head>
+<h:body>
+	<ui:include src="/public/header.xhtml" />
+	<h:form>
+		<p:panel header="Clientes">
+			<h:messages />
+			<p:commandButton id="btnInsert" value="Incluir" styleClass="bt_padrao" icon="ui-icon-circle-plus"
+				action="#{customerView.preparePersist}" update="dadosUsuario"
+				ajax="false" />
+			<p:dataTable id="tableCustomers" value="#{customerView.customerHelper.listAllCustomers}"
+				var="customer">		
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Id:" />
+					</f:facet>
+					<h:outputText value="#{customer.id}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome" />
+					</f:facet>
+					<h:outputText value="#{customer.customerName}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Sobrenome" />
+					</f:facet>
+					<h:outputText value="#{customer.customerLastName}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Endereço" />
+					</f:facet>
+					<h:outputText value="#{customer.address}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="CPF" />
+					</f:facet>
+					<h:outputText value="#{customer.cpf}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="E-mail:" />
+					</f:facet>
+					<h:outputText value="#{customer.email}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Telefone" />
+					</f:facet>
+					<h:outputText value="#{customer.foneNumber}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="RG" />
+					</f:facet>
+					<h:outputText value="#{customer.rg}" />
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnUpdate" value="Editar" styleClass="bt_padrao" icon="ui-icon-pencil"
+						action="#{customerView.prepareUpdate}"
+						ajax="false">
+						<f:setPropertyActionListener target="#{customerView.selectedCustomer}"
+							value="#{customer}" />
+					</p:commandButton>
+					<p:commandButton id="btnEnable" value="Ativar" styleClass="bt_finalizar" update="tableCustomers" ajax="false" action="#{customerView.enableCustomer}" rendered="#{customer.active eq false}" >
+						<f:setPropertyActionListener target="#{customerView.selectedCustomer}"
+							value="#{customer}" />
+					</p:commandButton>
+					<p:commandButton id="btnDisable" value="Desativar" styleClass="bt_cancelar" update="tableCustomers" ajax="false" action="#{customerView.disableCustomer}" rendered="#{customer.active eq true}">
+						<f:setPropertyActionListener target="#{customerView.selectedCustomer}"
+							value="#{customer}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

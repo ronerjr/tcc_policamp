@@ -14,28 +14,28 @@
 	<h:form>
 		<p:panel header="Tipos de Produtos">
 			<p:messages />
-			<h:commandButton styleClass="bt_padrao" icon="ui-icon-circle-plus"
+			<p:commandButton styleClass="bt_padrao" icon="ui-icon-circle-plus"
 				id="insertProductType" value="Incluir"
 				action="#{productTypeView.prepareInsert}" />
 			<p:dataTable id="tabelaTipoProdutos"
-				value="#{productTypeView.typeHelper.listProductTypes}"
+				value="#{productTypeView.productTypeHelper.listProductTypes}"
 				var="productType">
 				<p:column>
 					<f:facet name="header">Cód.</f:facet>
-					<h:outputText value="#{productType.NIdTipoProduto}" />
+					<h:outputText value="#{productType.id}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">Tipo Produto</f:facet>
-					<h:outputText value="#{productType.STipo}" />
+					<h:outputText value="#{productType.productType}" />
 				</p:column>
 				<p:column>
-					<h:commandButton id="prepareUpdate"
+					<p:commandButton id="prepareUpdate"
 						action="#{productTypeView.prepareUpdate}" styleClass="bt_padrao"
 						icon="ui-icon-pencil" value="Editar">
 						<f:setPropertyActionListener
 							target="#{productTypeView.persistProductType}"
 							value="#{productType}" />
-					</h:commandButton>
+					</p:commandButton>
 					<p:commandButton id="prepareDelete" styleClass="bt_padrao"
 						value="Excluir" actionListener="#{productTypeView.prepareDelete}" oncomplete="confirmDelete.show();">
 						<f:setPropertyActionListener

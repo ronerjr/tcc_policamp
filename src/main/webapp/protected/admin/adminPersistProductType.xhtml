@@ -7,26 +7,25 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	<title>jFood - Administração</title>
 </h:head>
 <h:body>
-	<ui:include src="/public/common/header.xhtml" />
+	<ui:include src="/public/header.xhtml" />
 	<h:form>
 		<h:messages />
 		<p:panel header="Dados do Tipo de Produto">
-			<p:panelGrid id="dadosTipoProduto" columns="2">
-				<p:outputLabel for="tipoProdNome" value="Nome:" />
-				<p:inputText id="tipoProdNome"
-					value="#{tipoProdutoView.persistProductType.STipo}" />
-				<h:commandButton styleClass="bt_finalizar" id="insert" value="Incluir" type="submit"
-					ajax="false" action="#{produtoView.insert}" update="tabelaTipoProdutos"
-					rendered="#{tipoProdutoView.persistProductType.NIdTipoProduto eq null}" />
-				<h:commandButton id="update" styleClass="bt_padrao" value="Alterar" type="submit"
+			<p:panelGrid id="productTypeData" columns="2">
+				<p:outputLabel for="productTypeName" value="Nome:" />
+				<p:inputText id="productTypeName"
+					value="#{productTypeView.persistProductType.productType}" />
+				<p:commandButton id="insert" value="Incluir" type="submit"
+					ajax="false" action="#{productTypeView.insert}" update="tabelaTipoProdutos"
+					rendered="#{productTypeView.persistProductType.id eq null}" />
+				<p:commandButton id="update" value="Alterar" type="submit"
 					ajax="false" action="#{produtoView.update}" update="tabelaTipoProduto"
-					rendered="#{tipoProdutoView.persistProductType.NIdTipoProduto ne null}" />
-				<h:commandButton id="cancelSave" styleClass="bt_cancelar" value="Cancelar" ajax="false"
-					action="adminProduct" update="dadosTipoProduto" />
+					rendered="#{productTypeView.persistProductType.id ne null}" />
+				<p:commandButton id="cancelSave" value="Cancelar" ajax="false"
+					action="adminProductType" update="productTypeData" />
 			</p:panelGrid>
 		</p:panel>
 	</h:form>

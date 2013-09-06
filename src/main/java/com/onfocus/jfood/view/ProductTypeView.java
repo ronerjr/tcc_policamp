@@ -33,6 +33,7 @@ public class ProductTypeView implements Serializable {
 	private ProductTypeHelper productTypeHelper;
 
 	public ProductTypeView() {
+		this.productTypeHelper = new ProductTypeHelper();
 	}
 
 	public void cleanFields() {
@@ -54,7 +55,7 @@ public class ProductTypeView implements Serializable {
 		if (productTypeHelper.validateInsertTipoProduto(persistProductType)) {
 			try {
 				DAOFactory.getService().insertProductType(persistProductType);
-				this.persistProductType = new ProductType();
+				persistProductType = new ProductType();
 				return CONSULT_PRODUCT_TYPE;
 			} catch (Exception e) {
 				return PERSIST_PRODUCT_TYPE;

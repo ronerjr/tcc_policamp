@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.onfocus.jfood.model.Complement;
+import com.onfocus.jfood.model.Customer;
 import com.onfocus.jfood.model.MeasureUnity;
 import com.onfocus.jfood.model.Order;
 import com.onfocus.jfood.model.OrderStatus;
@@ -22,7 +23,7 @@ import com.onfocus.jfood.model.User;
 import com.onfocus.jfood.model.UserType;
 
 /**
- * @author Roner
+ * @author Nois
  * 
  */
 public class GenericImplDAO implements GenericDAO {
@@ -57,21 +58,18 @@ public class GenericImplDAO implements GenericDAO {
 
 	@Override
 	public User findUserByUsername(String user) {
-		return (User) this.session.createCriteria(User.class).add(
-				Restrictions.eq("userName", user));
+		return (User) this.session.createCriteria(User.class).add(Restrictions.eq("userName", user));
 	}
 
 	@Override
 	public User findUserByEmail(String email) {
-		return (User) this.session.createCriteria(User.class)
-				.add(Restrictions.eq("userEmail", email)).uniqueResult();
+		return (User) this.session.createCriteria(User.class).add(Restrictions.eq("userEmail", email)).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> listUserByType(UserType type) {
-		return this.session.createCriteria(User.class)
-				.add(Restrictions.eq("userType", type.getId())).list();
+		return this.session.createCriteria(User.class).add(Restrictions.eq("userType", type.getId())).list();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -262,32 +260,30 @@ public class GenericImplDAO implements GenericDAO {
 
 	@Override
 	public ProductType insertProductType(ProductType productType) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.save(productType);
+		return productType;
 	}
 
 	@Override
 	public ProductType updateProductType(ProductType productType) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.merge(productType);
+		return productType;
 	}
 
 	@Override
 	public void deleteProductType(ProductType productType) {
-		// TODO Auto-generated method stub
-
+		this.session.delete(productType);
 	}
 
 	@Override
 	public ProductType findProductTypeById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (ProductType) this.session.get(ProductType.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<ProductType> listAllProductTypes() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(ProductType.class).list();
 	}
 
 	@Override
@@ -314,8 +310,8 @@ public class GenericImplDAO implements GenericDAO {
 
 	@Override
 	public UserType findUserTypeByType(String type) {
-		return (UserType) this.session.createCriteria(UserType.class)
-				.add(Restrictions.eq("userType", type)).uniqueResult();
+		return (UserType) this.session.createCriteria(UserType.class).add(Restrictions.eq("userType", type))
+				.uniqueResult();
 	}
 
 	@Override
@@ -491,4 +487,28 @@ public class GenericImplDAO implements GenericDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Customer updateCustomer(Customer customer) {
+		this.session.merge(customer);
+		return customer;
+	}
+
+	@Override
+	public Customer findCustomerId(long id) {
+		return (Customer) this.session.get(Customer.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Customer> listAllCustomers() {
+		return this.session.createCriteria(Customer.class).list();
+	}
+
+	@Override
+	public Customer insertCustomers(Customer customer) {
+		this.session.save(customer);
+		return customer;
+	}
+
 }

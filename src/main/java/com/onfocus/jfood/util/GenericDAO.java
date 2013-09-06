@@ -6,6 +6,7 @@ package com.onfocus.jfood.util;
 import java.util.List;
 
 import com.onfocus.jfood.model.Complement;
+import com.onfocus.jfood.model.Customer;
 import com.onfocus.jfood.model.MeasureUnity;
 import com.onfocus.jfood.model.Order;
 import com.onfocus.jfood.model.OrderStatus;
@@ -19,74 +20,25 @@ import com.onfocus.jfood.model.User;
 import com.onfocus.jfood.model.UserType;
 
 /**
- * @author Roner
+ * 
  * 
  */
 public interface GenericDAO {
-	// ***************************************************
-	// Ações para usuários
-	// ***************************************************
 
-	/**
-	 * Método para inserção de usuário no banco do dados
-	 * 
-	 * @param usuário
-	 * @return usuário
-	 */
 	public User insertUser(User user);
 
-	/**
-	 * Método para alteração de usuário no banco do dados
-	 * 
-	 * @param usuário
-	 * @return usuário
-	 */
 	public User updateUser(User user);
 
-	/**
-	 * Método para remoção de usuário no banco do dados
-	 * 
-	 * @param usuário
-	 */
 	public void deleteUser(User user);
 
-	/**
-	 * Método para encontrar usuário no banco do dados pelo identificador
-	 * 
-	 * @param id
-	 * @return usuário
-	 */
 	public User findUserById(String id);
 
-	/**
-	 * Método para encontrar usuário no banco do dados pelo nome
-	 * 
-	 * @param nome
-	 * @return usuário
-	 */
 	public User findUserByUsername(String name);
 
-	/**
-	 * Método para encontrar usuário no banco do dados pelo email
-	 * 
-	 * @param email
-	 * @return usuário
-	 */
 	public User findUserByEmail(String email);
 
-	/**
-	 * Método para listar os usuários no banco do dados por tipo
-	 * 
-	 * @param tipo
-	 * @return lista de usuários
-	 */
 	public List<User> listUserByType(UserType type);
 
-	/**
-	 * Método para listar usuários no banco do dados
-	 * 
-	 * @return lista de usuários
-	 */
 	public List<User> listAllUsers();
 
 	// ***************************************************
@@ -266,4 +218,16 @@ public interface GenericDAO {
 	public void deleteMesa(Tables table);
 
 	public Long invoiceNextValue();
+	
+	// ***************************************************
+	// Ações para Clientes
+	// ***************************************************
+
+	public Customer insertCustomers(Customer customer);	
+	
+	public Customer updateCustomer(Customer customer);
+
+	public Customer findCustomerId(long id);
+
+	public List<Customer> listAllCustomers();
 }

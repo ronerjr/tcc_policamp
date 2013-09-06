@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<title>Inserção Customer</title>
+</h:head>
+<h:body>
+	<ui:include src="/public/header.xhtml" />
+	<h:form>
+		<p:panel header="Dados do usuário">
+			<p:panelGrid id="dadosClientes" columns="2">
+				<p:outputLabel value="Id:" for="id"
+					rendered="#{customerView.persistCustomer.id ne null}" />
+				<p:inputText id="id" value="#{customerView.persistCustomer.id}"
+					rendered="#{customerView.persistCustomer.id ne null}" disabled="true" />
+				<p:outputLabel value="Nome:" for="name" />
+				<p:inputText id="name" label="Nome"
+					value="#{customerView.persistCustomer.customerName}" />
+				
+				<p:outputLabel value="Sobrenome" for="sobrenome" />
+				<p:inputText id="sobrenome" label="Sobrenome"
+					value="#{customerView.persistCustomer.customerLastName}" />	
+				
+				<p:outputLabel value="Endereço" for="endereço" />
+				<p:inputText id="endereço" label="Endereço"
+					value="#{customerView.persistCustomer.address}" />	
+					
+				<p:outputLabel value="CPF" for="cpf" />
+				<p:inputMask id="cpf" label="CPF"
+					value="#{customerView.persistCustomer.cpf}" mask="999.999.999-99"/>
+					
+				<p:outputLabel value="RG" for="rg" />
+				<p:inputMask id="rg" label="RG"
+					value="#{customerView.persistCustomer.rg}" mask="999999999"  />
+					
+				<p:outputLabel value="Telefone" for="telefone" />
+				<p:inputMask id="telefone" label="Telefone"
+					value="#{customerView.persistCustomer.foneNumber}" mask="(999) 9999-9999"/>
+					
+				<p:outputLabel value="Celular" for="celular" />
+				<p:inputMask id="celular" label="Celular"
+					value="#{customerView.persistCustomer.cellNumber}" mask="(999) 99999-9999"/>	
+					
+				<p:outputLabel value="Email" for="email" />
+				<p:inputText id="email" label="Email"
+					value="#{customerView.persistCustomer.email}" />	
+					
+				<p:outputLabel value="Ativo:" for="situacao" />
+				<p:selectBooleanCheckbox id="situacao"
+					value="#{customerView.persistCustomer.active}" />
+				<p:commandButton id="btnInserir" styleClass="bt_finalizar" action="#{customerView.insert}"
+					rendered="#{customerView.persistCustomer.id eq null}" value="Incluir"
+					ajax="false" />
+				<p:commandButton id="btnAlterar" styleClass="bt_padrao" action="#{customerView.update}"
+					rendered="#{customerView.persistCustomer.id ne null}" value="Alterar"
+					ajax="false" />
+				<p:commandButton value="Cancelar" styleClass="bt_cancelar" action="adminCustomers"
+					ajax="false" />
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
