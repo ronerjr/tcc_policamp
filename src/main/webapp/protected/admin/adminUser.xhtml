@@ -12,49 +12,47 @@
 <h:body>
 	<ui:include src="/public/header.xhtml" />
 	<h:form>
-		<p:panel header="Usuários">
+		<p:panel header="#{msg['user.header']}">
 			<h:messages />
-			<p:commandButton id="btnInsert" value="Incluir" styleClass="bt_padrao" icon="ui-icon-circle-plus"
-				action="#{userView.preparePersist}" update="dadosUsuario"
-				ajax="false" />
-			<p:dataTable id="tableUsuario" value="#{userView.userHelper.listaUsuarios}"
-				var="user">
+			<p:commandButton id="btnInsert" value="#{msg['global.insert']}" styleClass="bt_padrao" icon="ui-icon-circle-plus"
+				action="#{userView.preparePersist}" ajax="false" />
+			<p:dataTable id="tableUser" value="#{userView.userHelper.userList}"	var="user">
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Id:" />
+						<h:outputText value="#{msg['user.id']}" />
 					</f:facet>
 					<h:outputText value="#{user.id}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Usuario:" />
+						<h:outputText value="#{msg['user.username']}" />
 					</f:facet>
 					<h:outputText value="#{user.userName}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Tipo:" />
+						<h:outputText value="#{msg['user.type']}" />
 					</f:facet>
 					<h:outputText value="#{user.userType.userType}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="E-mail:" />
+						<h:outputText value="#{msg['user.email']}" />
 					</f:facet>
 					<h:outputText value="#{user.userEmail}" />
 				</p:column>
 				<p:column>
-					<p:commandButton id="btnUpdate" value="Editar" styleClass="bt_padrao" icon="ui-icon-pencil"
-						action="#{userView.prepareUpdate}"
-						ajax="false">
+					<p:commandButton id="btnUpdate" value="#{msg['global.edit']}" icon="ui-icon-pencil"
+						action="#{userView.prepareUpdate}" ajax="false">
+						<f:setPropertyActionListener target="#{userView.selectedUser}" value="#{user}" />
+					</p:commandButton>
+					<p:commandButton id="btnEnable" value="#{msg['global.enable']}"  update="tableUser" ajax="false" 
+					action="#{usuarioView.enableUser}" rendered="#{user.active eq false}" >
 						<f:setPropertyActionListener target="#{userView.selectedUser}"
 							value="#{user}" />
 					</p:commandButton>
-					<p:commandButton id="btnEnable" value="Ativar" styleClass="bt_finalizar" update="tableUsuario" ajax="false" action="#{usuarioView.enableUser}" rendered="#{usuario.BAtivo eq false}" >
-						<f:setPropertyActionListener target="#{userView.selectedUser}"
-							value="#{user}" />
-					</p:commandButton>
-					<p:commandButton id="btnDisable" value="Desativar" styleClass="bt_cancelar" update="tableUsuario" ajax="false" action="#{usuarioView.disableUser}" rendered="#{usuario.BAtivo eq true}">
+					<p:commandButton id="btnDisable" value="Desativar" update="tableUser" ajax="false" 
+					action="#{usuarioView.disableUser}" rendered="#{user.active eq true}">
 						<f:setPropertyActionListener target="#{userView.selectedUser}"
 							value="#{user}" />
 					</p:commandButton>

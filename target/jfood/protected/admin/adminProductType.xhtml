@@ -17,7 +17,7 @@
 			<p:commandButton styleClass="bt_padrao" icon="ui-icon-circle-plus"
 				id="insertProductType" value="Incluir"
 				action="#{productTypeView.prepareInsert}" />
-			<p:dataTable id="tabelaTipoProdutos"
+			<p:dataTable id="productTypeTable"
 				value="#{productTypeView.productTypeHelper.listProductTypes}"
 				var="productType">
 				<p:column>
@@ -33,7 +33,7 @@
 						action="#{productTypeView.prepareUpdate}" styleClass="bt_padrao"
 						icon="ui-icon-pencil" value="Editar">
 						<f:setPropertyActionListener
-							target="#{productTypeView.persistProductType}"
+							target="#{productTypeView.selectedProductType}"
 							value="#{productType}" />
 					</p:commandButton>
 					<p:commandButton id="prepareDelete" styleClass="bt_padrao"

@@ -22,14 +22,13 @@ public class UserHelper implements Serializable {
 	}
 
 	public boolean validateInsert(User persistUser) {
-		if (persistUser.getUserName() == null
-				|| persistUser.getUserPassword() == null
+		if (persistUser.getUserName() == null || persistUser.getUserPassword() == null
 				|| persistUser.getUserType() == null) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Deve-se preencher o formulário corretamente",
-							"ERRO"));
+			FacesContext.getCurrentInstance()
+					.addMessage(
+							null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR,
+									"Deve-se preencher o formulário corretamente", "ERRO"));
 			return false;
 		} else {
 			return true;
@@ -38,12 +37,12 @@ public class UserHelper implements Serializable {
 
 	public Permission setAuthorityByType(User user) {
 		switch (user.getUserType().getUserType()) {
-		case "Administrador":
-			return Permission.ROLE_ADMINISTRATOR;
-		case "Gerente":
-			return Permission.ROLE_MANAGER;
-		default:
-			return Permission.ROLE_USER;
+			case "Administrador":
+				return Permission.ROLE_ADMINISTRATOR;
+			case "Gerente":
+				return Permission.ROLE_MANAGER;
+			default:
+				return Permission.ROLE_USER;
 		}
 	}
 
@@ -51,7 +50,7 @@ public class UserHelper implements Serializable {
 		return DAOFactory.getService().listAllUserTypes();
 	}
 
-	public List<User> getListaUsuarios() {
+	public List<User> getUserList() {
 		return DAOFactory.getService().listAllUsers();
 	}
 
