@@ -12,23 +12,22 @@
 <h:body>
 	<ui:include src="/public/header.xhtml" />
 	<h:form>
-		<h:messages />
 		<p:panel header="Dados do Tipo de Produto">
+		<p:messages id="productTypeMessages" />
 			<p:panelGrid id="productTypeData" columns="2">
-				<p:outputLabel for="productTypeId" value="Id:" />
+				<p:outputLabel for="productTypeId" value="Id:" rendered="#{productTypeView.persistProductType.id ne null}"/>
 				<p:inputText id="productTypeId" disabled="true" rendered="#{productTypeView.persistProductType.id ne null}"
 					value="#{productTypeView.persistProductType.id}" />
 				<p:outputLabel for="productTypeName" value="Nome:" />
 				<p:inputText id="productTypeName"
 					value="#{productTypeView.persistProductType.productType}" />
 				<p:commandButton id="insert" value="Incluir" type="submit"
-					ajax="false" action="#{productTypeView.insert}" update="tabelaTipoProdutos"
+					ajax="false" action="#{productTypeView.insert}" update="productTypeTable"
 					rendered="#{productTypeView.persistProductType.id eq null}" />
-				<p:commandButton id="update" value="Alterar" type="submit"
-					ajax="false" action="#{produtoView.update}" update="tabelaTipoProduto"
+				<p:commandButton id="update" value="Alterar" type="submit" 
+					ajax="false" action="#{productTypeView.update}" update="productTypeTable"
 					rendered="#{productTypeView.persistProductType.id ne null}" />
-				<p:commandButton id="cancelSave" value="Cancelar" ajax="false"
-					action="adminProductType" update="productTypeData" />
+				<p:commandButton id="cancelSave" value="Cancelar" ajax="false" action="adminProductType" />
 			</p:panelGrid>
 		</p:panel>
 	</h:form>

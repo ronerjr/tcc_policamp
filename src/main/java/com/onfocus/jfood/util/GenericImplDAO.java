@@ -286,6 +286,12 @@ public class GenericImplDAO implements GenericDAO {
 		return this.session.createCriteria(ProductType.class).list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ProductType> listProductTypeByType(String type) {
+		return this.session.createCriteria(ProductType.class).add(Restrictions.eq("productType", type)).list();
+	}
+
 	@Override
 	public UserType insertUserType(UserType type) {
 		this.session.save(type);

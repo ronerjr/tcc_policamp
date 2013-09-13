@@ -127,6 +127,8 @@ public interface GenericDAO {
 
 	public ProductType findProductTypeById(long id);
 
+	public List<ProductType> listProductTypeByType(String type);
+
 	public List<ProductType> listAllProductTypes();
 
 	// ***************************************************
@@ -218,13 +220,13 @@ public interface GenericDAO {
 	public void deleteMesa(Tables table);
 
 	public Long invoiceNextValue();
-	
+
 	// ***************************************************
 	// Ações para Clientes
 	// ***************************************************
 
-	public Customer insertCustomers(Customer customer);	
-	
+	public Customer insertCustomers(Customer customer);
+
 	public Customer updateCustomer(Customer customer);
 
 	public Customer findCustomerId(long id);
