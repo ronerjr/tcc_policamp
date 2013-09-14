@@ -1,33 +1,39 @@
 package com.onfocus.jfood.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the measure_unity database table.
  * 
  */
 @Entity
-@Table(name="measure_unity")
+@Table(name = "measure_unity")
 public class MeasureUnity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false, length=6)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "code")
 	private String code;
 
-	@Column(nullable=false, length=30)
+	@Column(name = "description")
 	private String description;
 
-	//bi-directional many-to-one association to Product
-	@OneToMany(mappedBy="measureUnity")
+	// bi-directional many-to-one association to Product
+	@OneToMany(mappedBy = "measureUnity")
 	private List<Product> products;
 
-    public MeasureUnity() {
-    }
+	public MeasureUnity() {
+	}
 
 	public String getCode() {
 		return this.code;
@@ -52,5 +58,71 @@ public class MeasureUnity implements Serializable {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((products == null) ? 0 : products.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		MeasureUnity other = (MeasureUnity) obj;
+		if (code == null) {
+			if (other.code != null) {
+				return false;
+			}
+		} else if (!code.equals(other.code)) {
+			return false;
+		}
+		if (description == null) {
+			if (other.description != null) {
+				return false;
+			}
+		} else if (!description.equals(other.description)) {
+			return false;
+		}
+		if (products == null) {
+			if (other.products != null) {
+				return false;
+			}
+		} else if (!products.equals(other.products)) {
+			return false;
+		}
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "MeasureUnity [code=" + code + ", description=" + description + ", products=" + products + "]";
+	}
+
 }

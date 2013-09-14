@@ -122,4 +122,112 @@ public class Product implements Serializable {
 		this.stockControls = stockControls;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((active == null) ? 0 : active.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((measureUnity == null) ? 0 : measureUnity.hashCode());
+		result = prime * result + ((orders == null) ? 0 : orders.hashCode());
+		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((productType == null) ? 0 : productType.hashCode());
+		result = prime * result + ((productValue == null) ? 0 : productValue.hashCode());
+		result = prime * result + ((stockControls == null) ? 0 : stockControls.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Product other = (Product) obj;
+		if (active == null) {
+			if (other.active != null) {
+				return false;
+			}
+		} else if (!active.equals(other.active)) {
+			return false;
+		}
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		if (measureUnity == null) {
+			if (other.measureUnity != null) {
+				return false;
+			}
+		} else if (!measureUnity.equals(other.measureUnity)) {
+			return false;
+		}
+		if (orders == null) {
+			if (other.orders != null) {
+				return false;
+			}
+		} else if (!orders.equals(other.orders)) {
+			return false;
+		}
+		if (productName == null) {
+			if (other.productName != null) {
+				return false;
+			}
+		} else if (!productName.equals(other.productName)) {
+			return false;
+		}
+		if (productType == null) {
+			if (other.productType != null) {
+				return false;
+			}
+		} else if (!productType.equals(other.productType)) {
+			return false;
+		}
+		if (productValue == null) {
+			if (other.productValue != null) {
+				return false;
+			}
+		} else if (!productValue.equals(other.productValue)) {
+			return false;
+		}
+		if (stockControls == null) {
+			if (other.stockControls != null) {
+				return false;
+			}
+		} else if (!stockControls.equals(other.stockControls)) {
+			return false;
+		}
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", active=" + active + ", productName=" + productName + ", productValue="
+				+ productValue + ", orders=" + orders + ", measureUnity=" + measureUnity + ", productType="
+				+ productType + ", stockControls=" + stockControls + "]";
+	}
+
 }

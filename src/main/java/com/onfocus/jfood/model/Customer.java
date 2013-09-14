@@ -26,7 +26,7 @@ public class Customer implements Serializable {
 	@Column(name = "active")
 	private Boolean active;
 
-	@Column(name = "Endereco")
+	@Column(name = "address")
 	private String address;
 
 	@Column(name = "cell_number")

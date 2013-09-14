@@ -83,4 +83,87 @@ public class ProductType implements Serializable {
 		this.products = products;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((complements == null) ? 0 : complements.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((orders == null) ? 0 : orders.hashCode());
+		result = prime * result + ((productType == null) ? 0 : productType.hashCode());
+		result = prime * result + ((products == null) ? 0 : products.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		ProductType other = (ProductType) obj;
+		if (complements == null) {
+			if (other.complements != null) {
+				return false;
+			}
+		} else if (!complements.equals(other.complements)) {
+			return false;
+		}
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		if (orders == null) {
+			if (other.orders != null) {
+				return false;
+			}
+		} else if (!orders.equals(other.orders)) {
+			return false;
+		}
+		if (productType == null) {
+			if (other.productType != null) {
+				return false;
+			}
+		} else if (!productType.equals(other.productType)) {
+			return false;
+		}
+		if (products == null) {
+			if (other.products != null) {
+				return false;
+			}
+		} else if (!products.equals(other.products)) {
+			return false;
+		}
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ProductType [id=" + id + ", productType=" + productType + ", complements=" + complements + ", orders="
+				+ orders + ", products=" + products + "]";
+	}
+
 }
