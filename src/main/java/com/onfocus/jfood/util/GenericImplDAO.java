@@ -176,50 +176,47 @@ public class GenericImplDAO implements GenericDAO {
 
 	@Override
 	public Product insertProduct(Product product) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.save(product);
+		return product;
 	}
 
 	@Override
 	public Product updateProduct(Product product) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.merge(product);
+		return product;
 	}
 
 	@Override
 	public void deleteProduct(Product product) {
-		// TODO Auto-generated method stub
-
+		this.session.delete(product);
 	}
 
 	@Override
 	public Product findProductById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Product) this.session.get(Product.class, id);
 	}
 
 	@Override
 	public Product findProductByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Product) this.session.createCriteria(Product.class).add(Restrictions.eq("productName", name));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> listProductByType(ProductType productType) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(Product.class).add(Restrictions.eq("productType", productType)).list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> listAllProductsEnable() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(Product.class).add(Restrictions.eq("active", true)).list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> listAllProducts() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(Product.class).list();
 	}
 
 	@Override
