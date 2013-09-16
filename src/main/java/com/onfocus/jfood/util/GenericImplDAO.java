@@ -355,74 +355,71 @@ public class GenericImplDAO implements GenericDAO {
 
 	@Override
 	public MeasureUnity insertMeasureUnit(MeasureUnity measureUnity) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.save(measureUnity);
+		return measureUnity;
 	}
 
 	@Override
 	public MeasureUnity updateMeasureUnit(MeasureUnity measureUnity) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.merge(measureUnity);
+		return measureUnity;
 	}
 
 	@Override
 	public void deleteMeasureUnit(MeasureUnity measureUnity) {
-		// TODO Auto-generated method stub
-
+		this.session.delete(measureUnity);
 	}
 
 	@Override
 	public MeasureUnity findMeasureUnitById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (MeasureUnity) this.session.get(MeasureUnity.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<MeasureUnity> listMeasureUnitByUnit(String measureUnity) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(MeasureUnity.class).add(Restrictions.eq("measureUnity", measureUnity))
+				.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<MeasureUnity> listAllMeasureUnits() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(MeasureUnity.class).list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Complement> listAllComplements() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(Complement.class).list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Complement> listComplementsByType(ProductType tipoProduto) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Complement> listComplementsByType(ProductType productType) {
+		return this.session.createCriteria(Complement.class).add(Restrictions.eq("productType", productType)).list();
 	}
 
 	@Override
 	public Complement findComplementById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Complement) this.session.get(Complement.class, id);
 	}
 
 	@Override
 	public Complement insertComplement(Complement complements) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.save(complements);
+		return complements;
 	}
 
 	@Override
 	public Complement updateComplement(Complement complements) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.merge(complements);
+		return complements;
 	}
 
 	@Override
 	public void deleteComplement(Complement complements) {
-		// TODO Auto-generated method stub
-
+		this.session.delete(complements);
 	}
 
 	@Override
