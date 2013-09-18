@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>jFood - Administração</title>
+</h:head>
+<h:body>
+	<ui:include src="/public/header.xhtml" />
+	<h:form>
+		<p:panel header="Estoque">
+			<p:messages />
+
+			<p:dataTable id="tableEstoque" var="stock"
+				value="#{stockView.stockHelper.listaEstoque}"
+				rowKey="#{stock.product.id}" selection="#{stockView.selectedStock}"
+				selectionMode="single" widgetVar="tableStock"   
+            emptyMessage="Nenhum produto encontrado." filteredValue="#{stockView.filteredStock}">
+				
+		<f:facet name="header">
+            Selecione um item e em seguida clique em editar para ver os detalhes.
+         <!-- FILTRO DE PESQUISA - AINDA A FAZER - SAMUEL  
+             <p:outputPanel>  
+                <h:outputText value="Pesquisar:" />  
+                <p:inputText id="globalFilter" filterEvent="enter" onkeyup="PF('stockView').filter()" style="width:150px" />  
+            </p:outputPanel> -->  
+        </f:facet>
+
+				<p:column headerText="Id">
+            #{stock.product.id}
+        </p:column>
+				<p:column headerText="Produto">
+            #{stock.product.productName}
+        </p:column>
+
+				<p:column headerText="Qtde.">
+            #{stock.quantity}
+        </p:column>
+
+				<p:column headerText="Criticidade">
+            #{stock.criticity}
+        </p:column>
+
+				<f:facet name="footer">
+					<p:commandButton id="btnUpdate" value="Editar"
+						icon="ui-icon-search" action="#{stockView.prepareUpdate}" />
+				</f:facet>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
