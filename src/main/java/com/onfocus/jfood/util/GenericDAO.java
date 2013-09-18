@@ -14,6 +14,7 @@ import com.onfocus.jfood.model.OrderType;
 import com.onfocus.jfood.model.PaymentMode;
 import com.onfocus.jfood.model.Product;
 import com.onfocus.jfood.model.ProductType;
+import com.onfocus.jfood.model.StockControl;
 import com.onfocus.jfood.model.Supplier;
 import com.onfocus.jfood.model.Tables;
 import com.onfocus.jfood.model.User;
@@ -40,6 +41,16 @@ public interface GenericDAO {
 	public List<User> listUserByType(UserType type);
 
 	public List<User> listAllUsers();
+	
+	// ***************************************************
+	// Ações para Estoque
+	// ***************************************************
+
+	public List<StockControl> filteredStock();
+	
+	public List<StockControl> listStock();
+	
+	public StockControl updateStock(StockControl stock);
 
 	// ***************************************************
 	// Ações para fornecedores
