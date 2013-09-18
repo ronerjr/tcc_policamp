@@ -23,10 +23,11 @@
 				
 		<f:facet name="header">
             Selecione um item e em seguida clique em editar para ver os detalhes.
-            <p:outputPanel>  
+         <!-- FILTRO DE PESQUISA - AINDA A FAZER - SAMUEL  
+             <p:outputPanel>  
                 <h:outputText value="Pesquisar:" />  
                 <p:inputText id="globalFilter" filterEvent="enter" onkeyup="PF('stockView').filter()" style="width:150px" />  
-            </p:outputPanel>  
+            </p:outputPanel> -->  
         </f:facet>
 
 				<p:column headerText="Id">
@@ -49,22 +50,6 @@
 						icon="ui-icon-search" action="#{stockView.prepareUpdate}" />
 				</f:facet>
 			</p:dataTable>
-<script type="text/javascript">
-/* <![CDATA[ */
-  jQuery(tableStock.jqId).find('th .ui-column-filter[onenter]').each(function(idx) {
-  var curEl = jQuery(this);
-  curEl.unbind('keydown');
- 
-  curEl.keydown(function(event) {
-    var e = (window.event) ? window.event : event;
-    if(e.keyCode == 13) {
-      event.preventDefault();
-      eval(curEl.attr('onenter'));
-    }
-  })
-});
-/* ]]> */
-</script>
 		</p:panel>
 	</h:form>
 </h:body>

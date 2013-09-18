@@ -14,7 +14,7 @@
 	<h:form id="productTypeForm">
 		<p:panel header="Tipos de Produtos">
 			<p:messages for="productTypeForm" />
-			<p:commandButton styleClass="bt_padrao" icon="ui-icon-circle-plus"
+			<p:commandButton icon="ui-icon-circle-plus"
 				id="insertProductType" value="Incluir" ajax="false"
 				action="#{productTypeView.prepareInsert}" />
 			<p:dataTable id="productTypeTable"
@@ -30,14 +30,13 @@
 				</p:column>
 				<p:column>
 					<p:commandButton id="prepareUpdate"
-						action="#{productTypeView.prepareUpdate}" styleClass="bt_padrao"
+						action="#{productTypeView.prepareUpdate}"
 						icon="ui-icon-pencil" value="Editar">
 						<f:setPropertyActionListener
 							target="#{productTypeView.selectedProductType}"
 							value="#{productType}" />
 					</p:commandButton>
-					<p:commandButton id="prepareDelete" styleClass="bt_padrao"
-						value="Excluir" actionListener="#{productTypeView.prepareDelete}" oncomplete="confirmDelete.show();">
+					<p:commandButton id="prepareDelete" value="Excluir" actionListener="#{productTypeView.prepareDelete}" oncomplete="confirmDelete.show();">
 						<f:setPropertyActionListener
 							target="#{productTypeView.selectedProductType}" value="#{productType}" />
 					</p:commandButton>
