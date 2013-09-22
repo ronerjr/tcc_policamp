@@ -17,6 +17,7 @@ import com.onfocus.jfood.model.OrderType;
 import com.onfocus.jfood.model.PaymentMode;
 import com.onfocus.jfood.model.Product;
 import com.onfocus.jfood.model.ProductType;
+import com.onfocus.jfood.model.StockControl;
 import com.onfocus.jfood.model.Supplier;
 import com.onfocus.jfood.model.Tables;
 import com.onfocus.jfood.model.User;
@@ -76,6 +77,24 @@ public class GenericImplDAO implements GenericDAO {
 	@Override
 	public List<User> listAllUsers() {
 		return this.session.createCriteria(User.class).list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<StockControl> listStock() {
+		return this.session.createCriteria(StockControl.class).list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<StockControl> filteredStock() {
+		return this.session.createCriteria(StockControl.class).list();
+	}
+
+	@Override
+	public StockControl updateStock(StockControl stock) {
+		this.session.merge(stock);
+		return stock;
 	}
 
 	@Override
@@ -176,50 +195,47 @@ public class GenericImplDAO implements GenericDAO {
 
 	@Override
 	public Product insertProduct(Product product) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.save(product);
+		return product;
 	}
 
 	@Override
 	public Product updateProduct(Product product) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.merge(product);
+		return product;
 	}
 
 	@Override
 	public void deleteProduct(Product product) {
-		// TODO Auto-generated method stub
-
+		this.session.delete(product);
 	}
 
 	@Override
 	public Product findProductById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Product) this.session.get(Product.class, id);
 	}
 
 	@Override
 	public Product findProductByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Product) this.session.createCriteria(Product.class).add(Restrictions.eq("productName", name));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> listProductByType(ProductType productType) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(Product.class).add(Restrictions.eq("productType", productType)).list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> listAllProductsEnable() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(Product.class).add(Restrictions.eq("active", true)).list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> listAllProducts() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(Product.class).list();
 	}
 
 	@Override
@@ -284,6 +300,12 @@ public class GenericImplDAO implements GenericDAO {
 	@Override
 	public List<ProductType> listAllProductTypes() {
 		return this.session.createCriteria(ProductType.class).list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ProductType> listProductTypeByType(String type) {
+		return this.session.createCriteria(ProductType.class).add(Restrictions.eq("productType", type)).list();
 	}
 
 	@Override
@@ -352,74 +374,71 @@ public class GenericImplDAO implements GenericDAO {
 
 	@Override
 	public MeasureUnity insertMeasureUnit(MeasureUnity measureUnity) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.save(measureUnity);
+		return measureUnity;
 	}
 
 	@Override
 	public MeasureUnity updateMeasureUnit(MeasureUnity measureUnity) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.merge(measureUnity);
+		return measureUnity;
 	}
 
 	@Override
 	public void deleteMeasureUnit(MeasureUnity measureUnity) {
-		// TODO Auto-generated method stub
-
+		this.session.delete(measureUnity);
 	}
 
 	@Override
 	public MeasureUnity findMeasureUnitById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (MeasureUnity) this.session.get(MeasureUnity.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<MeasureUnity> listMeasureUnitByUnit(String measureUnity) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(MeasureUnity.class).add(Restrictions.eq("measureUnity", measureUnity))
+				.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<MeasureUnity> listAllMeasureUnits() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(MeasureUnity.class).list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Complement> listAllComplements() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(Complement.class).list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Complement> listComplementsByType(ProductType tipoProduto) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Complement> listComplementsByType(ProductType productType) {
+		return this.session.createCriteria(Complement.class).add(Restrictions.eq("productType", productType)).list();
 	}
 
 	@Override
 	public Complement findComplementById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Complement) this.session.get(Complement.class, id);
 	}
 
 	@Override
 	public Complement insertComplement(Complement complements) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.save(complements);
+		return complements;
 	}
 
 	@Override
 	public Complement updateComplement(Complement complements) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.merge(complements);
+		return complements;
 	}
 
 	@Override
 	public void deleteComplement(Complement complements) {
-		// TODO Auto-generated method stub
-
+		this.session.delete(complements);
 	}
 
 	@Override

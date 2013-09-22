@@ -14,6 +14,7 @@ import com.onfocus.jfood.model.OrderType;
 import com.onfocus.jfood.model.PaymentMode;
 import com.onfocus.jfood.model.Product;
 import com.onfocus.jfood.model.ProductType;
+import com.onfocus.jfood.model.StockControl;
 import com.onfocus.jfood.model.Supplier;
 import com.onfocus.jfood.model.Tables;
 import com.onfocus.jfood.model.User;
@@ -40,6 +41,16 @@ public interface GenericDAO {
 	public List<User> listUserByType(UserType type);
 
 	public List<User> listAllUsers();
+	
+	// ***************************************************
+	// Ações para Estoque
+	// ***************************************************
+
+	public List<StockControl> filteredStock();
+	
+	public List<StockControl> listStock();
+	
+	public StockControl updateStock(StockControl stock);
 
 	// ***************************************************
 	// Ações para fornecedores
@@ -126,6 +137,8 @@ public interface GenericDAO {
 	public void deleteProductType(ProductType productType);
 
 	public ProductType findProductTypeById(long id);
+
+	public List<ProductType> listProductTypeByType(String type);
 
 	public List<ProductType> listAllProductTypes();
 
@@ -218,13 +231,13 @@ public interface GenericDAO {
 	public void deleteMesa(Tables table);
 
 	public Long invoiceNextValue();
-	
+
 	// ***************************************************
 	// Ações para Clientes
 	// ***************************************************
 
-	public Customer insertCustomers(Customer customer);	
-	
+	public Customer insertCustomers(Customer customer);
+
 	public Customer updateCustomer(Customer customer);
 
 	public Customer findCustomerId(long id);

@@ -53,5 +53,4 @@ public class UserHelper implements Serializable {
 	public List<User> getUserList() {
 		return DAOFactory.getService().listAllUsers();
 	}
-
 }

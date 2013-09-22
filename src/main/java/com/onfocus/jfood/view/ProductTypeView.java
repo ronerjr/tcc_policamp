@@ -50,15 +50,22 @@ public class ProductTypeView implements Serializable {
 		return PERSIST_PRODUCT_TYPE;
 	}
 
+	public String prepareDelete() {
+		return null;
+	}
+
 	public void insert() {
 		if (productTypeHelper.validateInsertTipoProduto(persistProductType)) {
 			try {
 				DAOFactory.getService().insertProductType(persistProductType);
 				persistProductType = new ProductType();
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_INFO, "Tipo de produto inserido com sucesso", "ERROR"));
+				FacesContext.getCurrentInstance()
+						.addMessage(
+								"productTypeMessages",
+								new FacesMessage(FacesMessage.SEVERITY_INFO, "SUCESSO",
+										"Tipo de produto inserido com sucesso"));
 			} catch (Exception e) {
-				FacesContext.getCurrentInstance().addMessage(null,
+				FacesContext.getCurrentInstance().addMessage("productTypeMessages",
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao inserir tipo de produto", "ERROR"));
 			}
 		}
@@ -68,14 +75,13 @@ public class ProductTypeView implements Serializable {
 		if (productTypeHelper.validateInsertTipoProduto(persistProductType)) {
 			try {
 				DAOFactory.getService().updateProductType(persistProductType);
-				this.persistProductType = new ProductType();
 				FacesContext.getCurrentInstance()
 						.addMessage(
-								null,
+								"productTypeMessages",
 								new FacesMessage(FacesMessage.SEVERITY_INFO, "Tipo de produto alterado com sucesso",
 										"SUCESSO"));
 			} catch (Exception e) {
-				FacesContext.getCurrentInstance().addMessage(null,
+				FacesContext.getCurrentInstance().addMessage("productTypeMessages",
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao alterar usuario", "ERROR"));
 			}
 		}
