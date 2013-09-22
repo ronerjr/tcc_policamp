@@ -6,32 +6,36 @@
   xmlns:ui="http://java.sun.com/jsf/facelets"
   xmlns:p="http://primefaces.org/ui">
 <ui:component>
-<h:form>
-	<div id="header">
-		<div id="logotipo"></div>
-		<div id="of_logo"></div>
-		<div id="usuario_logado">
-			<p> Usuário: <h:outputText value="#{userView.userHelper.currentUser}"/></p>
-		</div>
-		<div id="topo"></div>
-		
+<h:form>	
+	<p:toolbar>  
+    <p:toolbarGroup align="left">
+    	<p:outputLabel id="loggedUser" value="Usuario: #{userView.userHelper.currentUser}" />
+    </p:toolbarGroup>
+    <p:toolbarGroup align="right">
+    <div>
+    	<p:selectOneMenu id="locale" value="#{userView.language}">
+    		<f:selectItem id="localeBR" itemLabel="PORTUGUES" itemValue="PORTUGUESE"/>
+    		<f:selectItem id="localeUS" itemLabel="ENGLISH" itemValue="ENGLISH"/>
+    		<p:ajax event="change" listener="#{userView.changeLanguage}" update="@this" />
+    	</p:selectOneMenu>
+    	<p:commandButton value="Logoff" action="/j_spring_security_logout" />
+    	</div>
+    </p:toolbarGroup>
+    </p:toolbar>
 		<p:menubar id="menu_principal">  
-              <p:menuitem styleClass="menu_item" value="Caixa" url="/protected/user/index.jsf"/>
-              <p:menuitem styleClass="menu_item" value="Relatórios" url="/protected/manager/relatories.jsf"/>
-              <p:submenu styleClass="menu_item" label="Administração">
-              	<p:menuitem styleClass="menu_item" value="Complementos de Produtos" url="/protected/admin/adminProductComplement.jsf"/>
-              	<p:menuitem styleClass="menu_item" value="Financeiro" url="/protected/admin/adminFinance.jsf"/>
-              	<p:menuitem styleClass="menu_item" value="Mesas" url="/protected/admin/adminTables.jsf"/>
-              	<p:menuitem styleClass="menu_item" value="Produtos" url="/protected/admin/adminProduct.jsf"/>
-              	<p:menuitem styleClass="menu_item" value="Tipos de Produtos" url="/protected/admin/adminProductType.jsf"/>
-              	<p:menuitem styleClass="menu_item" value="Unidades de Medida" url="/protected/admin/adminMeasurementUnit.jsf"/>
-              	<p:menuitem styleClass="menu_item" value="Usuários" url="/protected/admin/adminUser.jsf"/>
-              	<p:menuitem styleClass="menu_item" value="Clientes" url="/protected/admin/adminCustomers.jsf"/>                	
+              <p:menuitem value="Caixa" url="/protected/user/index.jsf"/>
+              <p:menuitem value="Relatórios" url="/protected/manager/relatories.jsf"/>
+              <p:submenu label="Administração">
+              	<p:menuitem value="Complementos de Produtos" url="/protected/admin/adminProductComplement.jsf"/>
+              	<p:menuitem value="Financeiro" url="/protected/admin/adminFinance.jsf"/>
+              	<p:menuitem value="Mesas" url="/protected/admin/adminTables.jsf"/>
+              	<p:menuitem value="Produtos" url="/protected/admin/adminProduct.jsf"/>
+              	<p:menuitem value="Tipos de Produtos" url="/protected/admin/adminProductType.jsf"/>
+              	<p:menuitem value="Unidades de Medida" url="/protected/admin/adminMeasurementUnit.jsf"/>
+              	<p:menuitem value="Usuários" url="/protected/admin/adminUser.jsf"/>
+              	<p:menuitem value="Clientes" url="/protected/admin/adminCustomers.jsf"/>                	
               </p:submenu>
-              <p:menuitem styleClass="menu_item" value="Configurações" url="/protected/manager/config.jsf"/>
-              <p:menuitem styleClass="menu_item" value="Logout" icon="ui-icon-close" url="/j_spring_security_logout"/>
-        </p:menubar>
-	</div>
+        </p:menubar>	
 </h:form>
 </ui:component>
 </html>

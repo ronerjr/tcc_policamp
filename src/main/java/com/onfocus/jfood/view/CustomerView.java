@@ -57,7 +57,7 @@ public class CustomerView implements Serializable {
 		if (this.customerHelper.validateInsert(this.persistCustomer)) {
 			if (DAOFactory.getService().insertCustomers(this.persistCustomer) == this.persistCustomer) {
 				FacesContext.getCurrentInstance().addMessage(
-						null,
+						"CustomerConfirme",
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente "
 								+ this.persistCustomer.getCustomerName() + " inserido com sucesso!", "SUCESSO"));
 				this.persistCustomer = new Customer();

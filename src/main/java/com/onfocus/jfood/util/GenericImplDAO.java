@@ -17,6 +17,7 @@ import com.onfocus.jfood.model.OrderType;
 import com.onfocus.jfood.model.PaymentMode;
 import com.onfocus.jfood.model.Product;
 import com.onfocus.jfood.model.ProductType;
+import com.onfocus.jfood.model.StockControl;
 import com.onfocus.jfood.model.Supplier;
 import com.onfocus.jfood.model.Tables;
 import com.onfocus.jfood.model.User;
@@ -76,6 +77,24 @@ public class GenericImplDAO implements GenericDAO {
 	@Override
 	public List<User> listAllUsers() {
 		return this.session.createCriteria(User.class).list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<StockControl> listStock() {
+		return this.session.createCriteria(StockControl.class).list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<StockControl> filteredStock() {
+		return this.session.createCriteria(StockControl.class).list();
+	}
+
+	@Override
+	public StockControl updateStock(StockControl stock) {
+		this.session.merge(stock);
+		return stock;
 	}
 
 	@Override

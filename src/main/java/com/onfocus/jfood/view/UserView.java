@@ -1,12 +1,15 @@
 package com.onfocus.jfood.view;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
+import com.onfocus.jfood.enums.Language;
 import com.onfocus.jfood.helper.UserHelper;
 import com.onfocus.jfood.model.User;
 import com.onfocus.jfood.util.DAOFactory;
@@ -27,6 +30,8 @@ public class UserView implements Serializable {
 
 	private UserHelper userHelper;
 
+	private Language language;
+
 	public UserView() {
 		userHelper = new UserHelper();
 	}
@@ -45,49 +50,37 @@ public class UserView implements Serializable {
 		if (this.userHelper.validateInsert(this.persistUser)) {
 			this.userHelper.setAuthorityByType(this.persistUser);
 			if (DAOFactory.getService().updateUser(this.persistUser) == this.persistUser) {
-				FacesContext.getCurrentInstance().addMessage(
-						null,
-						new FacesMessage(FacesMessage.SEVERITY_INFO,
-								"Usuario alterado com sucesso!", "SUCESSO"));
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario alterado com sucesso!", "SUCESSO"));
 				this.persistUser = new User();
 			} else {
-				FacesContext.getCurrentInstance().addMessage(
-						null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR,
-								"Erro ao alterar usuario", "ERROR"));
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao alterar usuario", "ERROR"));
 			}
 			return CONSULT_USER;
 		} else {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Erro ao alterar usuario", "ERROR"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao alterar usuario", "ERROR"));
 			return PERSIST_USER;
 		}
 	}
 
 	public void insert() {
 		if (this.userHelper.validateInsert(this.persistUser)) {
-			this.persistUser.setPermission(this.userHelper.setAuthorityByType(
-					this.persistUser).name());
+			this.persistUser.setPermission(this.userHelper.setAuthorityByType(this.persistUser).name());
 			if (DAOFactory.getService().insertUser(this.persistUser) == this.persistUser) {
 				FacesContext.getCurrentInstance().addMessage(
 						null,
-						new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario "
-								+ this.persistUser.getUserName()
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario " + this.persistUser.getUserName()
 								+ " inserido com sucesso!", "SUCESSO"));
 				this.persistUser = new User();
 			} else {
-				FacesContext.getCurrentInstance().addMessage(
-						null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR,
-								"Erro ao inserir usu�rio", "ERRO"));
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao inserir usu�rio", "ERRO"));
 			}
 		} else {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Erro ao inserir usu�rio", "ERRO"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao inserir usu�rio", "ERRO"));
 		}
 	}
 
@@ -103,6 +96,18 @@ public class UserView implements Serializable {
 		this.selectedUser.setActive(false);
 		this.persistUser = this.selectedUser;
 		update();
+	}
+
+	public void changeLanguage() {
+		if (this.language.equals(Language.PORTUGUESE)) {
+			UIViewRoot viewRoot = new UIViewRoot();
+			viewRoot.setLocale(new Locale("pt", "BR"));
+			FacesContext.getCurrentInstance().setViewRoot(viewRoot);
+		} else if (this.language.equals(Language.ENGLISH)) {
+			UIViewRoot viewRoot = new UIViewRoot();
+			viewRoot.setLocale(Locale.US);
+			FacesContext.getCurrentInstance().setViewRoot(viewRoot);
+		}
 	}
 
 	/**
@@ -148,5 +153,20 @@ public class UserView implements Serializable {
 	 */
 	public void setUserHelper(UserHelper userHelper) {
 		this.userHelper = userHelper;
+	}
+
+	/**
+	 * @return the locale
+	 */
+	public Language getLanguage() {
+		return language;
+	}
+
+	/**
+	 * @param language
+	 *            the locale to set
+	 */
+	public void setLanguage(Language language) {
+		this.language = language;
 	}
 }
