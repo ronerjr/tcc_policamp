@@ -136,4 +136,8 @@ public class ProductTypeView implements Serializable {
 	public void setProductTypeHelper(ProductTypeHelper productTypeHelper) {
 		this.productTypeHelper = productTypeHelper;
 	}
+
+	public static String getConsultProductType() {
+		return CONSULT_PRODUCT_TYPE;
+	}
 }
