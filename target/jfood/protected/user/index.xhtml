@@ -8,8 +8,126 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>jFood - Gestão Alimentícia</title>
+
 </h:head>
 <h:body>
 	<ui:include src="/public/header.xhtml"></ui:include>
+	<h:form prependId="false">
+		<p:tabView id="tabView" dynamic="true">
+			<p:tab id="pedidos" title="Pedidos">
+				<p:growl id="growl" showDetail="true" />
+				<table>
+					<tr>
+						<td><h:outputText value="Cod. Cliente: " /></td>
+						<td><p:inputText id="cliente" size="2" maxlength="2">
+								<p:ajax event="blur" listener="#{orderView.atualizaCampoCliente}"
+									update="comboProdutos" />
+							</p:inputText></td>
+
+						<td><h:outputText value="Cliente " for="cliente" /></td>
+						<td><p:inputText id="nomecliente" /></td>
+						<td><p:commandButton id="novoCliente" value="Novo Cliente" />
+						</td>
+					</tr>
+				</table>
+				<p:separator />
+
+
+				<!-- Pedidos -->
+				<h:panelGroup id="panelPedidos">
+					<table>
+						<tr>
+							<td><h:outputText value="Codigo: " for="codigo" /></td>
+							<td><p:inputText maxlength="3" size="3" id="codigo"
+									value="#{orderView.codigoProduto}">
+									<p:ajax event="blur"
+										listener="#{orderView.atualizaCampoCodigo}"
+										update="comboProdutos" />
+								</p:inputText></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Produto: " for="comboProdutos" /></td>
+							<td><p:selectOneMenu id="comboProdutos"
+									value="#{orderView.persistOrder.product}">
+									<f:selectItems value="#{orderView.orderHelper.productList}"
+										var="product" itemValue="#{product}"
+										itemLabel="#{product.productName}" />
+								</p:selectOneMenu></td>
+						</tr>
+
+						<tr>
+							<td><h:outputText value="Quantidade: " for="quantidade" /></td>
+							<td><p:spinner id="qtdProduto" maxlength="2" size="2"
+									min="0" value="" /></td>
+						</tr>
+
+						<tr>
+							<td><h:commandButton icon="ui-icon-plusthick"
+									value="Adicionar" styleClass="bt_padrao" /></td>
+						</tr>
+
+					</table>
+				</h:panelGroup>
+				<p:separator />
+				<p:dataTable id="listaProdutosPedidos" value="" var="pedido"
+					rows="10">
+					<p:column>
+						<f:facet name="header">Cod</f:facet>
+						<h:outputText value="" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Produto</f:facet>
+						<h:outputText value="" />
+						<h:outputText value="" rendered="" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Quant.</f:facet>
+						<h:outputText value="" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Valor Unit.</f:facet>
+						<h:outputText value="" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">Valor Total</f:facet>
+						<h:outputText value="" />
+						<f:facet name="footer"></f:facet>
+					</p:column>
+					<p:column>
+						<p:commandButton id="deleteProduto" ajax="false" update=""
+							icon="ui-icon-closethick">
+							<f:setPropertyActionListener value=""
+								target="#{orderView.selectProduto}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:commandButton id="cancPedido" type="submit"
+					value="Cancelar Pedido" styleClass="bt_cancelar"
+					action="#{orderView.limpaTela}" />
+				<p:commandButton id="montaPedido" value="Montar Pedido"
+					onclick="montarPedido.show()" />
+			</p:tab>
+
+		</p:tabView>
+
+		<p:dialog header="Dados do cliente" widgetVar="clienteDlg"
+			id="cliente" showEffect="fade" hideEffect="fade" modal="true">
+			<p:panelGrid columns="2">
+				<p:outputLabel for="telefone" value="Telefone:" />
+				<p:inputText id="telefone" value="" />
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" value="" />
+				<p:outputLabel for="sobrenome" value="Sobrenome:" />
+				<p:inputText id="sobrenome" value="" />
+				<p:outputLabel for="cpf" value="CPF:" />
+				<p:inputText id="cpf" value="" />
+				<p:outputLabel for="endereco" value="Endereço:" />
+				<p:inputText id="endereco" value="" />
+				<p:commandButton value="Ok" onclick="clienteDlg.hide();" />
+				<br />
+			</p:panelGrid>
+		</p:dialog>
+	</h:form>
 </h:body>
 </h:html>
