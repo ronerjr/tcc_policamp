@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<title>jFood - Administração</title>
+</h:head>
+<h:body>
+	<ui:include src="/public/header.xhtml" />
+	<h:form>
+		<p:panel header="Dados do Produto">
+		<p:messages id="productMessages" />
+			<p:panelGrid id="dadosProduto" columns="2">
+				<p:outputLabel value="Id:" for="id" />
+				<p:inputText id="id" value="#{productView.persistProduct.id}"/>					
+					<p:outputLabel value="Nome:" for="name" />
+				<p:inputText id="name" label="Nome"
+					value="#{productView.persistProduct.productName}" />
+					<p:outputLabel value="Valor:" for="value" />
+				<p:inputText id="value" label="Valor"
+					value="#{productView.persistProduct.productValue}" />
+					<p:outputLabel value="Unid/Medida:" for="unity" />
+				<p:selectOneMenu id="unity" value="#{productView.persistProduct.measureUnity}"
+					effect="fade">
+					<f:selectItem itemLabel="Unidade de Medida:" itemValue="" />
+                        <f:selectItems value="#{productView.productHelper.measureUnitiesList}" var="unity"
+						itemLabel="#{unity.code}" itemValue="#{unity}" />
+				</p:selectOneMenu> 
+				<p:outputLabel value="Tipo/Produto:" for="type" />
+				<p:selectOneMenu id="type" value="#{productView.persistProduct.productType}"
+					effect="fade">
+					<f:selectItem itemLabel="Tipo de Produto:" itemValue="" />
+					<f:selectItems value="#{productView.productHelper.productTypesList}" var="type"
+						itemLabel="#{type.productType}" itemValue="#{type}" />
+				</p:selectOneMenu> 
+				<p:outputLabel value="ativo:" for ="activeProduct"/>
+				<p:selectBooleanCheckbox id="activeProduct" value="#{productView.persistProduct.active}" />
+				<p:commandButton id="btnInserir" styleClass="bt_finalizar" action="#{productView.insert}"
+					rendered="#{productView.persistProduct.id eq null}" value="Salvar"
+					ajax="false" />
+				<p:commandButton id="btnAlterar" styleClass="bt_padrao" action="#{productView.update}"
+					rendered="#{productView.persistProduct.id ne null}" value="Alterar"
+					ajax="false" />
+				<p:commandButton value="Cancelar" styleClass="bt_cancelar" action="adminProduct"
+					ajax="false" />				
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

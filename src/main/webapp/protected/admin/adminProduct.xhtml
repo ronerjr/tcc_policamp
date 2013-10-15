@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>jFood - Administração</title>
+</h:head>
+<h:body>
+	<ui:include src="/public/header.xhtml" />
+	<h:form>
+		<p:panel header="Produtos">
+			<h:messages />
+			<p:commandButton id="btnInsert" value="Incluir" styleClass="bt_padrao" icon="ui-icon-circle-plus"
+				action="#{productView.preparePersist}" update="dadosProduto"
+				ajax="false" />
+				<p:dataTable id="tableProduct" value="#{productView.productHelper.productList}"
+				var="product">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Id:" />
+					</f:facet>
+					<h:outputText value="#{product.id}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome:" />
+					</f:facet>
+					<h:outputText value="#{product.productName}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Valor:" />
+					</f:facet>
+					<h:outputText value="#{product.productValue}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Unid/Medida:" />
+					</f:facet>
+					<h:outputText value="#{product.measureUnity}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Tipo/Produto:" />
+					</f:facet>
+					<h:outputText value="#{product.productType}" />
+				</p:column>
+				<p:column>
+					<p:commandButton id="btnUpdate" value="Editar" styleClass="bt_padrao" icon="ui-icon-pencil"
+						action="#{productView.prepareUpdate}"
+						ajax="false">
+						<f:setPropertyActionListener target="#{productView.selectedProduct}"
+							value="#{product}" />
+					</p:commandButton>
+					<p:commandButton id="btnEnable" value="Ativar" update="tableProduct" ajax="false" 
+					action="#{productView.enableProduct}" rendered="#{product.active ne true}">
+						<f:setPropertyActionListener target="#{productView.selectedProduct}"
+							value="#{product}" />
+					</p:commandButton>		
+					<p:commandButton id="btnDisable" value="Desativar" update="tableProduct" ajax="false" 
+					action="#{productView.disableProduct}" rendered="#{product.active eq true}">
+						<f:setPropertyActionListener target="#{productView.selectedProduct}"
+							value="#{product}" />
+					</p:commandButton>					
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
