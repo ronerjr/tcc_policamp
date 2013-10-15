@@ -16,7 +16,7 @@
     	<p:selectOneMenu id="locale" value="#{userView.language}">
     		<f:selectItem id="localeBR" itemLabel="PORTUGUES" itemValue="PORTUGUESE"/>
     		<f:selectItem id="localeUS" itemLabel="ENGLISH" itemValue="ENGLISH"/>
-    		<p:ajax event="change" listener="#{userView.changeLanguage}" update="@this" />
+    		<p:ajax event="change" listener="#{userView.changeLanguage}" update="@all" />
     	</p:selectOneMenu>
     	<p:commandButton value="Logoff" action="/j_spring_security_logout" />
     	</div>
@@ -34,6 +34,7 @@
               	<p:menuitem value="Unidades de Medida" url="/protected/admin/adminMeasurementUnit.jsf"/>
               	<p:menuitem value="Usuários" url="/protected/admin/adminUser.jsf"/>
               	<p:menuitem value="Clientes" url="/protected/admin/adminCustomers.jsf"/>                	
+              	<p:menuitem value="Estoque" url="/protected/admin/adminStock.jsf"/>
               </p:submenu>
         </p:menubar>	
 </h:form>

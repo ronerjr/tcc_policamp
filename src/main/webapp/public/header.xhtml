@@ -16,7 +16,7 @@
     	<p:selectOneMenu id="locale" value="#{userView.language}">
     		<f:selectItem id="localeBR" itemLabel="PORTUGUES" itemValue="PORTUGUESE"/>
     		<f:selectItem id="localeUS" itemLabel="ENGLISH" itemValue="ENGLISH"/>
-    		<p:ajax event="change" listener="#{userView.changeLanguage}" update="@this" />
+    		<p:ajax event="change" listener="#{userView.changeLanguage}" update="@all" />
     	</p:selectOneMenu>
     	<p:commandButton value="Logoff" action="/j_spring_security_logout" />
     	</div>
