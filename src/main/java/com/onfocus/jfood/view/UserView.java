@@ -32,6 +32,8 @@ public class UserView implements Serializable {
 
 	private Language language;
 
+	private Locale locale;
+
 	public UserView() {
 		userHelper = new UserHelper();
 	}
@@ -99,14 +101,17 @@ public class UserView implements Serializable {
 	}
 
 	public void changeLanguage() {
-		if (this.language.equals(Language.PORTUGUESE)) {
+		try {
+			if (this.language.equals(Language.PORTUGUESE)) {
+				locale = new Locale("pt", "BR");
+			} else if (this.language.equals(Language.ENGLISH)) {
+				locale = new Locale("en", "US");
+			}
 			UIViewRoot viewRoot = new UIViewRoot();
-			viewRoot.setLocale(new Locale("pt", "BR"));
+			viewRoot.setLocale(locale);
 			FacesContext.getCurrentInstance().setViewRoot(viewRoot);
-		} else if (this.language.equals(Language.ENGLISH)) {
-			UIViewRoot viewRoot = new UIViewRoot();
-			viewRoot.setLocale(Locale.US);
-			FacesContext.getCurrentInstance().setViewRoot(viewRoot);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -168,5 +173,20 @@ public class UserView implements Serializable {
 	 */
 	public void setLanguage(Language language) {
 		this.language = language;
+	}
+
+	/**
+	 * @return the locale
+	 */
+	public Locale getLocale() {
+		return locale;
+	}
+
+	/**
+	 * @param locale
+	 *            the locale to set
+	 */
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 }
