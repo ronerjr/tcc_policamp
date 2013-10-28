@@ -78,13 +78,13 @@ public class GenericImplDAO implements GenericDAO {
 	public List<User> listAllUsers() {
 		return this.session.createCriteria(User.class).list();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<StockControl> listStock() {
 		return this.session.createCriteria(StockControl.class).list();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<StockControl> filteredStock() {
@@ -441,39 +441,36 @@ public class GenericImplDAO implements GenericDAO {
 		this.session.delete(complements);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<PaymentMode> listAllPaymentMode() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(PaymentMode.class).list();
 	}
 
 	@Override
 	public PaymentMode findPaymentMode(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (PaymentMode) this.session.get(PaymentMode.class, id);
 	}
 
 	@Override
 	public PaymentMode insertPaymentMode(PaymentMode paymentMode) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.save(paymentMode);
+		return paymentMode;
 	}
 
 	@Override
 	public PaymentMode updatePaymentMode(PaymentMode paymentMode) {
-		// TODO Auto-generated method stub
-		return null;
+		this.session.merge(paymentMode);
+		return paymentMode;
 	}
 
 	@Override
 	public void deletePaymentMode(PaymentMode paymentMode) {
-		// TODO Auto-generated method stub
-
+		this.session.delete(paymentMode);
 	}
 
 	@Override
 	public List<Tables> listAllTables() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

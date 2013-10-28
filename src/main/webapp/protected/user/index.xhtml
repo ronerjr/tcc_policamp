@@ -42,14 +42,16 @@
 									value="#{orderView.codigoProduto}">
 									<p:ajax event="blur"
 										listener="#{orderView.atualizaCampoCodigo}"
-										update="comboProdutos" />
+										update="@form" />
 								</p:inputText></td>
 						</tr>
+						
 						<tr>
+							<p:messages id="productmessage"/>
 							<td><h:outputText value="Produto: " for="comboProdutos" /></td>
 							<td><p:selectOneMenu id="comboProdutos"
-									value="#{orderView.persistOrder.product}">
-									<f:selectItems value="#{orderView.orderHelper.productList}"
+									value="#{orderView.persistOrder.product}" activeIndex="#{orderView.persistOrder.product}" >
+									<f:selectItems value="#{orderView.orderHelper.listProducts}"
 										var="product" itemValue="#{product}"
 										itemLabel="#{product.productName}" />
 								</p:selectOneMenu></td>

@@ -49,40 +49,29 @@ public class UserView implements Serializable {
 	}
 
 	public String update() {
-		if (this.userHelper.validateInsert(this.persistUser)) {
-			this.userHelper.setAuthorityByType(this.persistUser);
-			if (DAOFactory.getService().updateUser(this.persistUser) == this.persistUser) {
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario alterado com sucesso!", "SUCESSO"));
-				this.persistUser = new User();
-			} else {
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao alterar usuario", "ERROR"));
-			}
-			return CONSULT_USER;
+		this.userHelper.setAuthorityByType(this.persistUser);
+		if (DAOFactory.getService().updateUser(this.persistUser) == this.persistUser) {
+			FacesContext.getCurrentInstance().addMessage("userMessages",
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário alterado com sucesso!", "SUCESSO"));
+			this.persistUser = new User();
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao alterar usuario", "ERROR"));
-			return PERSIST_USER;
+			FacesContext.getCurrentInstance().addMessage("userMessages",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao alterar usuário", "ERROR"));
 		}
+		return CONSULT_USER;
 	}
 
 	public void insert() {
-		if (this.userHelper.validateInsert(this.persistUser)) {
-			this.persistUser.setPermission(this.userHelper.setAuthorityByType(this.persistUser).name());
-			if (DAOFactory.getService().insertUser(this.persistUser) == this.persistUser) {
-				FacesContext.getCurrentInstance().addMessage(
-						null,
-						new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario " + this.persistUser.getUserName()
-								+ " inserido com sucesso!", "SUCESSO"));
-				this.persistUser = new User();
-			} else {
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao inserir usu�rio", "ERRO"));
-			}
+		this.persistUser.setPermission(this.userHelper.setAuthorityByType(this.persistUser).name());
+		if (DAOFactory.getService().insertUser(this.persistUser) == this.persistUser) {
+			FacesContext.getCurrentInstance().addMessage(
+					"userMessages",
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário " + this.persistUser.getUserName()
+							+ " inserido com sucesso!", "SUCESSO"));
+			this.persistUser = new User();
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao inserir usu�rio", "ERRO"));
+			FacesContext.getCurrentInstance().addMessage("userMessages",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao inserir usuário", "ERRO"));
 		}
 	}
 

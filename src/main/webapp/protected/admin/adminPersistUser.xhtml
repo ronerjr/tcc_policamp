@@ -12,6 +12,7 @@
 <h:body>
 	<ui:include src="/public/header.xhtml" />
 	<h:form>
+		<p:messages id="userMessages"></p:messages>
 		<p:panel header="Dados do usuário">
 			<p:panelGrid id="dadosUsuario" columns="2">
 				<p:outputLabel value="#{msg['user.id']}" for="id"
@@ -19,11 +20,11 @@
 				<p:inputText id="id" value="#{userView.persistUser.id}"
 					rendered="#{userView.persistUser.id ne null}" disabled="true" />
 				<p:outputLabel value="#{msg['user.user']}" for="user" />
-				<p:inputText id="user" value="#{userView.persistUser.login}" />
+				<p:inputText id="user" value="#{userView.persistUser.login}" required="true"/>
 				<p:outputLabel value="#{msg['user.username']}" for="name" />
-				<p:inputText id="name" value="#{userView.persistUser.userName}" />
+				<p:inputText id="name" value="#{userView.persistUser.userName}" required="true"/>
 				<p:outputLabel value="#{msg['user.type']}" for="type" />
-				<p:selectOneMenu id="type" value="#{userView.persistUser.userType}"	effect="fade">
+				<p:selectOneMenu id="type" value="#{userView.persistUser.userType}"	effect="fade" required="true">
 					<f:selectItem itemLabel="#{msg['usertype.header']}" itemValue="" />
 					<f:selectItems value="#{userView.userHelper.userTypeList}" var="type"
 						itemLabel="#{type.userType}" itemValue="#{type}" />
@@ -33,14 +34,14 @@
 					<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
 				</p:inputText>
 				<p:outputLabel value="#{msg['user.password']}" for="senha" />
-				<p:password id="senha" value="#{userView.persistUser.userPassword}" />
+				<p:password id="senha" value="#{userView.persistUser.userPassword}" required="true"/>
 				<p:outputLabel value="#{msg['user.active']}" for="situacao" />
 				<p:selectBooleanCheckbox id="situacao" value="#{userView.persistUser.active}" />
 				<p:commandButton id="btnInsert" action="#{userView.insert}" ajax="false"
 					rendered="#{userView.persistUser.id eq null}" value="#{msg['global.insert']}"/>
 				<p:commandButton id="btnUpdate" action="#{userView.update}" ajax="false"
 					rendered="#{userView.persistUser.id ne null}" value="#{msg['global.update']}"/>
-				<p:commandButton value="#{msg['global.cancel']}" action="adminUser"	ajax="false" />
+				<p:commandButton value="#{msg['global.cancel']}" action="adminUser"	ajax="false" immediate="true"/>
 			</p:panelGrid>
 		</p:panel>
 	</h:form>

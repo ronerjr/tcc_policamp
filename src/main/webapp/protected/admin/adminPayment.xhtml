@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>jFood - Administração</title>
+</h:head>
+<h:body>
+	<ui:include src="/public/header.xhtml" />
+	<h:form>
+		<p:panel header="Forma de pagamento">
+			<p:messages id="paymentMessages"/>
+			<p:commandButton id="btnInsert" value="Incluir" styleClass="bt_padrao" icon="ui-icon-circle-plus"
+				action="#{paymentModeView.preparePersist}" ajax="false" />
+				<p:dataTable id="tablePayment" value="#{paymentModeView.paymentHelper.listPayment}"
+				var="pay">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Id:" />
+					</f:facet>
+					<h:outputText value="#{pay.id}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Descrição:" />
+					</f:facet>
+					<h:outputText value="#{pay.paymentMode}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Taxa:" />
+					</f:facet>
+					<h:outputText value="#{pay.tax}" />
+				</p:column>
+				<p:column>
+				<p:commandButton id="btnEnable" value="Ativar" styleClass="bt_finalizar" update="tablePayment" ajax="false" action="#{paymentModeView.enablePaymentMode}" rendered="#{pay.active eq false}" >
+						<f:setPropertyActionListener target="#{paymentModeView.selectedPaymentMode}"
+							value="#{pay}" />
+				</p:commandButton>
+				<p:commandButton id="btnDisable" value="Desativar" styleClass="bt_cancelar" update="tablePayment" ajax="false" action="#{paymentModeView.disablePaymentMode}" rendered="#{pay.active eq true}">
+					<f:setPropertyActionListener target="#{paymentModeView.selectedPaymentMode}" value="#{pay}" />
+				</p:commandButton>
+				<p:commandButton id="btnUpdate" value="Editar" icon="ui-icon-pencil"
+					action="#{paymentModeView.prepareUpdate}" ajax="false">
+					<f:setPropertyActionListener target="#{paymentModeView.selectedPaymentMode}" value="#{pay}" />
+				</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
