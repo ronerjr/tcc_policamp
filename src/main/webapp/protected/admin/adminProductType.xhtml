@@ -7,47 +7,47 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>jFood - Administração</title>
+	<title>#{msg['jfood.administrationtitle']}</title>
 </h:head>
 <h:body>
 	<ui:include src="/public/header.xhtml" />
 	<h:form id="productTypeForm">
-		<p:panel header="Tipos de Produtos">
+		<p:panel header="#{msg['header.producttypes']}">
 			<p:messages for="productTypeForm" />
 			<p:commandButton icon="ui-icon-circle-plus"
-				id="insertProductType" value="Incluir" ajax="false"
+				id="insertProductType" value="#{msg['global.insert']}" ajax="false"
 				action="#{productTypeView.prepareInsert}" />
 			<p:dataTable id="productTypeTable"
 				value="#{productTypeView.productTypeHelper.listProductTypes}"
 				var="productType">
 				<p:column>
-					<f:facet name="header">Cód.</f:facet>
+					<f:facet name="header">#{msg['adminproducttype.code']}</f:facet>
 					<h:outputText value="#{productType.id}" />
 				</p:column>
 				<p:column>
-					<f:facet name="header">Tipo Produto</f:facet>
+					<f:facet name="header">#{msg['adminproducttype.producttype']}</f:facet>
 					<h:outputText value="#{productType.productType}" />
 				</p:column>
 				<p:column>
 					<p:commandButton id="prepareUpdate"
 						action="#{productTypeView.prepareUpdate}"
-						icon="ui-icon-pencil" value="Editar">
+						icon="ui-icon-pencil" value="#{msg['global.edit']}">
 						<f:setPropertyActionListener
 							target="#{productTypeView.selectedProductType}"
 							value="#{productType}" />
 					</p:commandButton>
-					<p:commandButton id="prepareDelete" value="Excluir" actionListener="#{productTypeView.prepareDelete}" oncomplete="confirmDelete.show();">
+					<p:commandButton id="prepareDelete" value="#{msg['global.delete']}" actionListener="#{productTypeView.prepareDelete}" oncomplete="confirmDelete.show();">
 						<f:setPropertyActionListener
 							target="#{productTypeView.selectedProductType}" value="#{productType}" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
-			<p:confirmDialog header="Excluir"
-				message="Deseja excluir este tipo de produto?" widgetVar="confirmDelete">
-				<p:commandButton id="confirmDeleteType" value="Sim"
+			<p:confirmDialog header="#{msg['global.delete']}"
+				message="#{msg['adminproducttype.prompt']}" widgetVar="confirmDelete">
+				<p:commandButton id="confirmDeleteType" value="#{['global.yes']}"
 					action="#{productTypeView.delete}" oncomplete="confirmDelete.hide();"
 					ajax="false" />
-				<p:commandButton id="cancelDeleteType" value="Não"
+				<p:commandButton id="cancelDeleteType" value="#{['global.no']}"
 					onclick="confirmDelete.hide();" ajax="false" />
 			</p:confirmDialog>
 		</p:panel>

@@ -1,0 +1,25 @@
+.input{
+    border-radius: 4px 4px 4px 4px;
+    font-size: 13px;
+    height: 16px;
+    margin: 12px 1px -2px;
+    padding: 1px;
+}
+
+.input:hover {
+    border: 1px solid #7BC1F7;
+    box-shadow: 0 0 15px #7BC1F7;
+    outline: medium none;
+}
+
+
+.bt_login {
+    background: -moz-linear-gradient(center top , #46ACFA 0%, #588FAD) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #490066;
+    border-radius: 6px 6px 6px 6px;
+    color: #123D54;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    padding: 10px 20px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7), 0 1px 0 rgba(255, 255, 255, 0.3);
+}
