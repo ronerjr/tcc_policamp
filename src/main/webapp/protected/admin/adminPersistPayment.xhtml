@@ -7,37 +7,37 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>jFood - Administração</title>
+	<title>#{msg['jfood.administrationtitle']}</title>
 </h:head>
 <h:body>
 	<ui:include src="/public/header.xhtml" />
 	<h:form>
-		<p:panel header="Dados da forma de pagamento">
+		<p:panel header="#{msg['adminpersistpayment.header']}">
 			<p:messages id="paymentMessages" />
 			<p:panelGrid id="dadosPagamento" columns="2">			
 			
 				<p:outputLabel value="Id:" for="id"/>
 				<p:inputText id="id" value="#{paymentModeView.persistPayment.id}" disabled="true"/> 
 
-				<p:outputLabel value="Descrição:" for="paymentMode" />
-				<p:inputText id="paymentMode" label="Descricao"
+				<p:outputLabel value="#{msg['adminpersistpayment.description']}:" for="paymentMode" />
+				<p:inputText id="paymentMode" label="#{msg['adminpersistpayment.description']}"
 					value="#{paymentModeView.persistPayment.paymentMode}" required="true" />
 				
-				<p:outputLabel value="Taxa:" for="paymentTax" />
-				<p:inputText id="paymentTax" label="Taxa"
+				<p:outputLabel value="#{msg['adminpersistpayment.tax']}:" for="paymentTax" />
+				<p:inputText id="paymentTax" label="#{msg['adminpersistpayment.tax']}"
 					value="#{paymentModeView.persistPayment.tax}" required="true"/>	
 				
-				<p:outputLabel value="Ativo:" for="situacao" />
+				<p:outputLabel value="#{msg['adminpersistpayment.active']}:" for="situacao" />
 				<p:selectBooleanCheckbox id="situacao"
 					value="#{paymentModeView.persistPayment.active}" />
 					
 				<p:commandButton id="btnInserir" styleClass="bt_finalizar" action="#{paymentModeView.insert}"
-					rendered="#{paymentModeView.persistPayment.id eq null}" value="Incluir"
+					rendered="#{paymentModeView.persistPayment.id eq null}" value="#{msg['global.insert']}"
 					ajax="false" />
 				<p:commandButton id="btnAlterar" styleClass="bt_padrao" action="#{paymentModeView.update}"
-					rendered="#{paymentModeView.persistPayment.id ne null}" value="Alterar"
+					rendered="#{paymentModeView.persistPayment.id ne null}" value="#{msg['global.update']}"
 					ajax="false" />
-				<p:commandButton value="Cancelar" styleClass="bt_cancelar" action="adminPayment"
+				<p:commandButton value="#{msg['global.cancel']}" styleClass="bt_cancelar" action="adminPayment"
 					ajax="false" immediate="true"/>
 			</p:panelGrid>
 		</p:panel>

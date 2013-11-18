@@ -7,14 +7,14 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>jFood - Administração</title>
+	<title>#{msg['jfood.administrationtitle']}</title>
 </h:head>
 <h:body>
 	<ui:include src="/public/header.xhtml" />
 	<h:form>
-		<p:panel header="Forma de pagamento">
+		<p:panel header="#{msg['paymentmode.header']}">
 			<p:messages id="paymentMessages"/>
-			<p:commandButton id="btnInsert" value="Incluir" styleClass="bt_padrao" icon="ui-icon-circle-plus"
+			<p:commandButton id="btnInsert" value="#{msg['global.insert']}" styleClass="bt_padrao" icon="ui-icon-circle-plus"
 				action="#{paymentModeView.preparePersist}" ajax="false" />
 				<p:dataTable id="tablePayment" value="#{paymentModeView.paymentHelper.listPayment}"
 				var="pay">
@@ -26,25 +26,25 @@
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Descrição:" />
+						<h:outputText value="#{msg['adminpersistpayment.description']}:" />
 					</f:facet>
 					<h:outputText value="#{pay.paymentMode}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Taxa:" />
+						<h:outputText value="#{msg['adminpersistpayment.tax']}:" />
 					</f:facet>
 					<h:outputText value="#{pay.tax}" />
 				</p:column>
 				<p:column>
-				<p:commandButton id="btnEnable" value="Ativar" styleClass="bt_finalizar" update="tablePayment" ajax="false" action="#{paymentModeView.enablePaymentMode}" rendered="#{pay.active eq false}" >
+				<p:commandButton id="btnEnable" value="#{msg['global.enable']}" styleClass="bt_finalizar" update="tablePayment" ajax="false" action="#{paymentModeView.enablePaymentMode}" rendered="#{pay.active eq false}" >
 						<f:setPropertyActionListener target="#{paymentModeView.selectedPaymentMode}"
 							value="#{pay}" />
 				</p:commandButton>
-				<p:commandButton id="btnDisable" value="Desativar" styleClass="bt_cancelar" update="tablePayment" ajax="false" action="#{paymentModeView.disablePaymentMode}" rendered="#{pay.active eq true}">
+				<p:commandButton id="btnDisable" value="#{msg['global.disable']}" styleClass="bt_cancelar" update="tablePayment" ajax="false" action="#{paymentModeView.disablePaymentMode}" rendered="#{pay.active eq true}">
 					<f:setPropertyActionListener target="#{paymentModeView.selectedPaymentMode}" value="#{pay}" />
 				</p:commandButton>
-				<p:commandButton id="btnUpdate" value="Editar" icon="ui-icon-pencil"
+				<p:commandButton id="btnUpdate" value="#{msg['global.edit']}" icon="ui-icon-pencil"
 					action="#{paymentModeView.prepareUpdate}" ajax="false">
 					<f:setPropertyActionListener target="#{paymentModeView.selectedPaymentMode}" value="#{pay}" />
 				</p:commandButton>
