@@ -13,22 +13,22 @@
 <h:body>
 	<ui:include src="/public/header.xhtml" />
 	<h:form>
-		<p:panel header="Dados do usuário">
+		<p:panel header="#{msg['customer.persist.header']}">
 		<p:messages id="CustomerConfirme" />
 			<p:panelGrid id="dadosClientes" columns="2">
 				<p:outputLabel value="Id:" for="id"
 					rendered="#{customerView.persistCustomer.id ne null}" />
 				<p:inputText id="id" value="#{customerView.persistCustomer.id}"
 					rendered="#{customerView.persistCustomer.id ne null}" disabled="true" />
-				<p:outputLabel value="Nome:" for="name" />
+				<p:outputLabel value="#{msg['customer.name']}" for="name" />
 				<p:inputText id="name" label="Nome"
 					value="#{customerView.persistCustomer.customerName}" />
 				
-				<p:outputLabel value="Sobrenome" for="sobrenome" />
+				<p:outputLabel value="#{msg['customer.lastname']}" for="sobrenome" />
 				<p:inputText id="sobrenome" label="Sobrenome"
 					value="#{customerView.persistCustomer.customerLastName}" />	
 				
-				<p:outputLabel value="Endereço" for="endereço" />
+				<p:outputLabel value="#{msg['customer.address']}" for="endereço" />
 				<p:inputText id="endereço" label="Endereço"
 					value="#{customerView.persistCustomer.address}" />	
 					
@@ -40,28 +40,28 @@
 				<p:inputMask id="rg" label="RG"
 					value="#{customerView.persistCustomer.rg}" mask="999999999"  />
 					
-				<p:outputLabel value="Telefone" for="telefone" />
+				<p:outputLabel value="#{msg['customer.fonenumber']}" for="telefone" />
 				<p:inputMask id="telefone" label="Telefone"
 					value="#{customerView.persistCustomer.foneNumber}" mask="(999) 9999-9999"/>
 					
-				<p:outputLabel value="Celular" for="celular" />
+				<p:outputLabel value="#{msg['customer.cellNumber']}" for="celular" />
 				<p:inputMask id="celular" label="Celular"
 					value="#{customerView.persistCustomer.cellNumber}" mask="(999) 99999-9999"/>	
 					
-				<p:outputLabel value="Email" for="email" />
-				<p:inputText id="email" label="Email"
+				<p:outputLabel value="E-mail" for="email" />
+				<p:inputText id="email" label="E-mail"
 					value="#{customerView.persistCustomer.email}" />	
 					
-				<p:outputLabel value="Ativo:" for="situacao" />
+				<p:outputLabel value="#{msg['customer.active']}" for="situacao" />
 				<p:selectBooleanCheckbox id="situacao"
 					value="#{customerView.persistCustomer.active}" />
 				<p:commandButton id="btnInserir" styleClass="bt_finalizar" action="#{customerView.insert}"
-					rendered="#{customerView.persistCustomer.id eq null}" value="Incluir"
+					rendered="#{customerView.persistCustomer.id eq null}" value="#{msg['global.insert']}"
 					ajax="false" />
 				<p:commandButton id="btnAlterar" styleClass="bt_padrao" action="#{customerView.update}"
-					rendered="#{customerView.persistCustomer.id ne null}" value="Alterar"
+					rendered="#{customerView.persistCustomer.id ne null}" value="#{msg['global.edit']}"
 					ajax="false" />
-				<p:commandButton value="Cancelar" styleClass="bt_cancelar" action="adminCustomers"
+				<p:commandButton value="#{msg['global.cancel']}" styleClass="bt_cancelar" action="adminCustomers"
 					ajax="false" />
 			</p:panelGrid>
 		</p:panel>

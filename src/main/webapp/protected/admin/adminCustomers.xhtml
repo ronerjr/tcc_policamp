@@ -7,14 +7,14 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>JanelaTeste</title>
+	<title>JanelaCliente</title>
 </h:head>
 <h:body>
 	<ui:include src="/public/header.xhtml" />
 	<h:form>
-		<p:panel header="Clientes">
+		<p:panel header="#{msg['customer.header']}">
 			<h:messages />
-			<p:commandButton id="btnInsert" value="Incluir" styleClass="bt_padrao" icon="ui-icon-circle-plus"
+			<p:commandButton id="btnInsert" value="#{msg['global.insert']}" styleClass="bt_padrao" icon="ui-icon-circle-plus"
 				action="#{customerView.preparePersist}" update="dadosUsuario"
 				ajax="false" />
 			<p:dataTable id="tableCustomers" value="#{customerView.customerHelper.listAllCustomers}"
@@ -27,19 +27,19 @@
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Nome" />
+						<h:outputText value="#{msg['customer.name']}"  />
 					</f:facet>
 					<h:outputText value="#{customer.customerName}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Sobrenome" />
+						<h:outputText value="#{msg['customer.lastname']}" />
 					</f:facet>
 					<h:outputText value="#{customer.customerLastName}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Endereço" />
+						<h:outputText value="#{msg['customer.address']}" />
 					</f:facet>
 					<h:outputText value="#{customer.address}" />
 				</p:column>
@@ -57,7 +57,7 @@
 				</p:column>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Telefone" />
+						<h:outputText value="#{msg['customer.fonenumber']}" />
 					</f:facet>
 					<h:outputText value="#{customer.foneNumber}" />
 				</p:column>
@@ -67,18 +67,26 @@
 					</f:facet>
 					<h:outputText value="#{customer.rg}" />
 				</p:column>
+				
 				<p:column>
-					<p:commandButton id="btnUpdate" value="Editar" styleClass="bt_padrao" icon="ui-icon-pencil"
+					<f:facet name="header">
+						<h:outputText value="#{msg['customer.cellNumber']}" />
+					</f:facet>
+					<h:outputText value="#{customer.cellNumber}" />
+				</p:column>
+				
+				<p:column>
+					<p:commandButton id="btnUpdate" value="#{msg['global.edit']}" styleClass="bt_padrao" icon="ui-icon-pencil"
 						action="#{customerView.prepareUpdate}"
 						ajax="false">
 						<f:setPropertyActionListener target="#{customerView.selectedCustomer}"
 							value="#{customer}" />
 					</p:commandButton>
-					<p:commandButton id="btnEnable" value="Ativar" styleClass="bt_finalizar" update="tableCustomers" ajax="false" action="#{customerView.enableCustomer}" rendered="#{customer.active eq false}" >
+					<p:commandButton id="btnEnable" value="#{msg['global.enable']}" styleClass="bt_finalizar" update="tableCustomers" ajax="false" action="#{customerView.enableCustomer}" rendered="#{customer.active eq false}" >
 						<f:setPropertyActionListener target="#{customerView.selectedCustomer}"
 							value="#{customer}" />
 					</p:commandButton>
-					<p:commandButton id="btnDisable" value="Desativar" styleClass="bt_cancelar" update="tableCustomers" ajax="false" action="#{customerView.disableCustomer}" rendered="#{customer.active eq true}">
+					<p:commandButton id="btnDisable" value="#{msg['global.disable']}" styleClass="bt_cancelar" update="tableCustomers" ajax="false" action="#{customerView.disableCustomer}" rendered="#{customer.active eq true}">
 						<f:setPropertyActionListener target="#{customerView.selectedCustomer}"
 							value="#{customer}" />
 					</p:commandButton>
