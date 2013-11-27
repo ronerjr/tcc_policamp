@@ -8,27 +8,27 @@
 	>
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>jFood - Administração</title>
+	<title>#{msg['jfood.administrationtitle']}</title>
 </h:head>
 <h:body>
 	<ui:include src="/public/header.xhtml"/>
 	<h:form>
-		<p:panel header="Detalhes do Produto">
+		<p:panel header="#{msg['persiststock.productdetail']}">
 			<p:panelGrid id="dadosEstoque" columns="2">
 				<p:outputLabel value="Id:" for="id"
 					rendered="#{stockView.persistStock.product.id ne null}" />
 				<p:inputText id="id" value="#{stockView.persistStock.product.id}"
 					rendered="#{stockView.persistStock.product.id ne null}" disabled="true" />
-				<p:outputLabel value="Quantidade:" for="quantity" />
-				<p:inputText id="quantity" label="Quantidade"
+				<p:outputLabel value="#{msg['adminstock.product']}:" for="quantity" />
+				<p:inputText id="quantity" label="#{msg['adminstock.product']}"
 					value="#{stockView.persistStock.quantity}" />
-				<p:outputLabel value="Criticidade:" for="criticity" />
-				<p:inputText id="criticity" label="Criticidade"
+				<p:outputLabel value="#{msg['adminstock.criticity']}:" for="criticity" />
+				<p:inputText id="criticity" label="#{msg['adminstock.criticity']}"
 					value="#{stockView.persistStock.criticity}" />
 				<p:commandButton id="btnAlterar" action="#{stockView.update}"
-					rendered="#{stockView.persistStock.product.id ne null}" value="Alterar"
+					rendered="#{stockView.persistStock.product.id ne null}" value="#{msg['global.update']}"
 					ajax="false"  />
-				<p:commandButton value="Cancelar" action="adminStock"
+				<p:commandButton value="#{msg['global.cancel']}" action="adminStock"
 					ajax="false" />
 			</p:panelGrid>
 		</p:panel>

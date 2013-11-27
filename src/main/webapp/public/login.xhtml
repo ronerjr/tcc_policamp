@@ -8,13 +8,15 @@
 <h:head>
 	<title>Login</title>
 	<link href="css/login.css" rel="stylesheet" type="text/css" />
+	<link href="css/layout.css" rel="stylesheet" type="text/css" />
+
 </h:head>
 <body id="body">
 
 	<form id="login" method="post"
 		action="#{request.contextPath}/j_spring_security_check">
-		<div id="logo"></div>
-		<div id="login_area">
+		<div id="logo"></div>		
+<div id="login_area">
 			<table class="login_table" >
 				<tr>
 					<td>#{msg['login.username']}</td>
@@ -37,6 +39,7 @@
 				</tr>
 			</table>
 		</div>	
+
 	</form>
 </body>
 </html>

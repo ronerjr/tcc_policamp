@@ -7,22 +7,22 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>jFood - Administração</title>
+	<title>#{msg['jfood.administrationtitle']}</title>
 </h:head>
 <h:body>
 	<ui:include src="/public/header.xhtml" />
 	<h:form>
-		<p:panel header="Estoque">
+		<p:panel header="#{msg['adminstock.header']}">
 			<p:messages />
 
 			<p:dataTable id="tableEstoque" var="stock"
 				value="#{stockView.stockHelper.listaEstoque}"
 				rowKey="#{stock.product.id}" selection="#{stockView.selectedStock}"
 				selectionMode="single" widgetVar="tableStock"   
-            emptyMessage="Nenhum produto encontrado." filteredValue="#{stockView.filteredStock}">
+            emptyMessage="#{msg['adminstock.emptymessage']}" filteredValue="#{stockView.filteredStock}">
 				
 		<f:facet name="header">
-            Selecione um item e em seguida clique em editar para ver os detalhes.
+	            <p>#{msg['adminstock.description']}</p>
          <!-- FILTRO DE PESQUISA - AINDA A FAZER - SAMUEL  
              <p:outputPanel>  
                 <h:outputText value="Pesquisar:" />  
@@ -30,23 +30,23 @@
             </p:outputPanel> -->  
         </f:facet>
 
-				<p:column headerText="Id">
+				<p:column headerText="#{msg['adminstock.id']}">
             #{stock.product.id}
         </p:column>
-				<p:column headerText="Produto">
+				<p:column headerText="#{msg['adminstock.product']}">
             #{stock.product.productName}
         </p:column>
 
-				<p:column headerText="Qtde.">
+				<p:column headerText="#{msg['adminstock.quantity']}">
             #{stock.quantity}
         </p:column>
 
-				<p:column headerText="Criticidade">
+				<p:column headerText="#{msg['adminstock.criticity']}">
             #{stock.criticity}
         </p:column>
 
 				<f:facet name="footer">
-					<p:commandButton id="btnUpdate" value="Editar"
+					<p:commandButton id="btnUpdate" value="#{msg['adminstock.btnupdate']}"
 						icon="ui-icon-search" action="#{stockView.prepareUpdate}" />
 				</f:facet>
 			</p:dataTable>
